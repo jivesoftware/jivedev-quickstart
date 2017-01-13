@@ -1,0 +1,25 @@
+{
+    "integrationUser": {
+        "systemAdmin": false
+    },
+    "tiles": [
+        {
+            "displayName": "BuilderTest",
+            "name": "BuilderTest",
+            "description": "BuilderTest",
+            "style": "CUSTOM_VIEW",
+            "displayWidth": "ALL",
+            "pageTypes": [
+                "PLACE",
+                "USER"
+            ],
+            "icons": {
+                "16": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-xsmall.png",
+                "48": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-small.png",
+                "128": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-med.png"
+            },
+            "view": "/public/tiles/BuilderTest/view.html?features=responsive,tile,core-v3&ts=1484266018560",
+            "config": "/public/tiles/BuilderTest/configure?ts=1484266018560"
+        }
+    ]
+}

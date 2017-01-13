@@ -1,0 +1,12 @@
+{
+  "jiveExtension": {
+    "id": "54e30c93-a66d-47ec-9878-81280e77d889",
+    "uuid": "54e30c93-a66d-47ec-9878-81280e77d889",
+    "name": "BuilderTest",
+    "description": "Description for BuilderTest",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "releasedOn": "2017-01-11T20:23:12.539Z"
+  }
+}

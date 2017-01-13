@@ -1,0 +1,7 @@
+h2 {
+    margin-bottom: 0;
+}
+input, url {
+    height: 40px;
+    min-width: 500px;
+}

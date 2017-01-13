@@ -1,0 +1,91 @@
+[2017-01-12 17:06:57.968] [WARN] jive-sdk - Please note that this should
+[2017-01-12 17:06:57.968] [WARN] jive-sdk - not be used for production!
+[2017-01-12 17:06:57.969] [WARN] jive-sdk - ******************************
+[2017-01-12 17:06:57.969] [DEBUG] jive-sdk - File persistence dir at 'db'
+[2017-01-12 17:06:57.983] [INFO] jive-sdk - Updating definition BuilderTest
+[2017-01-12 17:06:58.478] [DEBUG] jive-sdk - Registered system event  newInstance :  no description
+[2017-01-12 17:06:58.478] [DEBUG] jive-sdk - Registered system event  updateInstance :  no description
+[2017-01-12 17:06:58.479] [DEBUG] jive-sdk - Registered event for BuilderTest : 'BuilderTest.10000.0'  Unique to definition
+[2017-01-12 17:06:58.483] [DEBUG] jive-sdk - Route added for BuilderTest : [GET] /BuilderTest/configure  ->  /Users/rashed.talukder/OneDrive/Jive Software/Programming/Custom View Tile Builder/test/tiles/BuilderTest/backend/routes/configure/get.js
+[2017-01-12 17:06:58.488] [DEBUG] jive-sdk - Creating directory extension_src/public
+[2017-01-12 17:06:58.489] [DEBUG] jive-sdk - Creating directory extension_src/public/apps
+[2017-01-12 17:06:58.490] [DEBUG] jive-sdk - Creating directory extension_src/public/tiles
+[2017-01-12 17:06:58.490] [DEBUG] jive-sdk - Copying public to extension_src/public
+[2017-01-12 17:06:58.506] [DEBUG] jive-sdk - Creating directory extension_src/public/services
+[2017-01-12 17:06:58.507] [DEBUG] jive-sdk - Copying public to extension_src/public
+[2017-01-12 17:06:58.533] [DEBUG] jive-sdk - Copying /Users/rashed.talukder/OneDrive/Jive Software/Programming/Custom View Tile Builder/test/tiles/BuilderTest/public to extension_src/public/tiles/BuilderTest
+[2017-01-12 17:06:58.559] [DEBUG] jive-sdk - definitions:
+[
+    {
+        "displayName": "BuilderTest",
+        "name": "BuilderTest",
+        "description": "BuilderTest",
+        "style": "CUSTOM_VIEW",
+        "displayWidth": "ALL",
+        "pageTypes": [
+            "PLACE",
+            "USER"
+        ],
+        "icons": {
+            "16": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-xsmall.png",
+            "48": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-small.png",
+            "128": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-med.png"
+        },
+        "view": "/public/tiles/BuilderTest/view.html?features=responsive,tile,core-v3",
+        "config": "/public/tiles/BuilderTest/configure"
+    }
+]
+[2017-01-12 17:06:58.560] [DEBUG] jive-sdk - templates:
+null
+[2017-01-12 17:06:58.560] [DEBUG] jive-sdk - apps:
+[]
+[2017-01-12 17:06:58.560] [DEBUG] jive-sdk - storageDefinitions:
+[]
+[2017-01-12 17:06:58.560] [DEBUG] jive-sdk - cartridges:
+[]
+[2017-01-12 17:06:58.563] [DEBUG] jive-sdk - Extension meta: 
+{
+    "package_version": "1.0",
+    "id": "54e30c93-a66d-47ec-9878-81280e77d889",
+    "type": "client-app",
+    "name": "BuilderTest",
+    "description": "Description for BuilderTest",
+    "minimum_version": "0080300000",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "released_on": "2017-01-11T20:23:12.539Z",
+    "service_url": "http://localhost",
+    "redirect_url": "%serviceURL%",
+    "releasedOn": "2017-01-11T20:23:12.539Z"
+}
+[2017-01-12 17:06:58.681] [DEBUG] jive-sdk - Zipping extension_src/definition.json to extension.zip  :  definition.json
+[2017-01-12 17:06:58.683] [DEBUG] jive-sdk - Zipping extension_src/meta.json to extension.zip  :  meta.json
+[2017-01-12 17:06:58.693] [DEBUG] jive-sdk - Zipping extension_src/data/extension-128.png to extension.zip  :  data/extension-128.png
+[2017-01-12 17:06:58.695] [DEBUG] jive-sdk - Zipping extension_src/data/eula.html to extension.zip  :  data/eula.html
+[2017-01-12 17:06:58.697] [DEBUG] jive-sdk - Zipping extension_src/data/extension-16.png to extension.zip  :  data/extension-16.png
+[2017-01-12 17:06:58.698] [DEBUG] jive-sdk - Zipping extension_src/data/extension-48.png to extension.zip  :  data/extension-48.png
+[2017-01-12 17:06:58.698] [DEBUG] jive-sdk - Zipping extension_src/data/install_instructions.html to extension.zip  :  data/install_instructions.html
+[2017-01-12 17:06:58.698] [DEBUG] jive-sdk - Zipping extension_src/data/overview.html to extension.zip  :  data/overview.html
+[2017-01-12 17:06:58.698] [DEBUG] jive-sdk - Zipping extension_src/data/privacy_policy.html to extension.zip  :  data/privacy_policy.html
+[2017-01-12 17:06:58.699] [DEBUG] jive-sdk - Zipping extension_src/data/screenshot_1.png to extension.zip  :  data/screenshot_1.png
+[2017-01-12 17:06:58.700] [DEBUG] jive-sdk - Zipping extension_src/data/screenshot_2.png to extension.zip  :  data/screenshot_2.png
+[2017-01-12 17:06:58.700] [DEBUG] jive-sdk - Zipping extension_src/i18n/en.properties to extension.zip  :  i18n/en.properties
+[2017-01-12 17:06:58.702] [DEBUG] jive-sdk - Zipping extension_src/i18n/root.properties to extension.zip  :  i18n/root.properties
+[2017-01-12 17:06:58.703] [DEBUG] jive-sdk - Zipping extension_src/public/favicon.ico to extension.zip  :  public/favicon.ico
+[2017-01-12 17:06:58.712] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/bootstrap-30.js to extension.zip  :  public/javascripts/bootstrap-30.js
+[2017-01-12 17:06:58.713] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/bootstrap-30.min.js to extension.zip  :  public/javascripts/bootstrap-30.min.js
+[2017-01-12 17:06:58.714] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/bootstrap.min.js to extension.zip  :  public/javascripts/bootstrap.min.js
+[2017-01-12 17:06:58.714] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jQuery-1.10.2.js to extension.zip  :  public/javascripts/jQuery-1.10.2.js
+[2017-01-12 17:06:58.714] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jquery-1.8.3.js to extension.zip  :  public/javascripts/jquery-1.8.3.js
+[2017-01-12 17:06:58.715] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jquery.base64.min.js to extension.zip  :  public/javascripts/jquery.base64.min.js
+[2017-01-12 17:06:58.716] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap-30.css to extension.zip  :  public/stylesheets/bootstrap-30.css
+[2017-01-12 17:06:58.717] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap-30.min.css to extension.zip  :  public/stylesheets/bootstrap-30.min.css
+[2017-01-12 17:06:58.717] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap.css to extension.zip  :  public/stylesheets/bootstrap.css
+[2017-01-12 17:06:58.717] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap.min.css to extension.zip  :  public/stylesheets/bootstrap.min.css
+[2017-01-12 17:06:58.718] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/style.css to extension.zip  :  public/stylesheets/style.css
+[2017-01-12 17:06:58.723] [DEBUG] jive-sdk - Zipping extension_src/public/tiles/BuilderTest/view.html to extension.zip  :  public/tiles/BuilderTest/view.html
+[2017-01-12 17:06:58.737] [DEBUG] jive-sdk - Zipping extension_src/public/tiles/BuilderTest/javascripts/view.js to extension.zip  :  public/tiles/BuilderTest/javascripts/view.js
+[2017-01-12 17:06:58.737] [DEBUG] jive-sdk - Zipping extension_src/public/tiles/BuilderTest/javascripts/main.js to extension.zip  :  public/tiles/BuilderTest/javascripts/main.js
+[2017-01-12 17:06:58.738] [DEBUG] jive-sdk - Zipping extension_src/public/tiles/BuilderTest/stylesheets/main.css to extension.zip  :  public/tiles/BuilderTest/stylesheets/main.css
+[2017-01-12 17:06:58.815] [INFO] jive-sdk - Updated 2 data file(s): [tileDefinition, jiveExtension]

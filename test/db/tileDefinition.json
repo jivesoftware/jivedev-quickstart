@@ -1,0 +1,21 @@
+{
+  "842d7674-5a3b-4412-b0fe-066e8a5591fa": {
+    "displayName": "BuilderTest",
+    "name": "BuilderTest",
+    "description": "BuilderTest",
+    "style": "CUSTOM_VIEW",
+    "displayWidth": "ALL",
+    "pageTypes": [
+      "PLACE",
+      "USER"
+    ],
+    "icons": {
+      "16": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-xsmall.png",
+      "48": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-small.png",
+      "128": "https://developer.jivesoftware.com/DeveloperAssets/images/icons/jivedev-med.png"
+    },
+    "view": "/BuilderTest/view.html?features=responsive,tile,core-v3",
+    "id": "842d7674-5a3b-4412-b0fe-066e8a5591fa",
+    "definitionDirName": "BuilderTest"
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "package_version": "1.0",
+    "id": "54e30c93-a66d-47ec-9878-81280e77d889",
+    "type": "client-app",
+    "name": "BuilderTest",
+    "description": "Description for BuilderTest",
+    "minimum_version": "0080300000",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "released_on": "2017-01-11T20:23:12.539Z",
+    "service_url": "http://localhost",
+    "redirect_url": "%serviceURL%",
+    "releasedOn": "2017-01-11T20:23:12.539Z"
+}
