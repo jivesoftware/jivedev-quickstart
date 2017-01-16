@@ -1,5 +1,5 @@
 {
-    "clientUrl": "http://localhost",
+    "clientUrl": "https://rashed.ngrok.io",
     "port": "8090",
     "development" : true,
 	  "clientUrlExcludesPort": true,

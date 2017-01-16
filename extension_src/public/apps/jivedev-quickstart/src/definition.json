@@ -1,0 +1,24 @@
+{
+    "integrationUser": {
+        "systemAdmin": false
+    },
+    "tiles": [
+        {
+            "displayName": "$$$DISPLAY_NAME$$$",
+            "name": "$$$INTERNAL_NAME$$$",
+            "description": "$$$DESCRIPTION$$$",
+            "style": "CUSTOM_VIEW",
+            "displayWidth": "ALL",
+            "pageTypes": [
+                "PLACE",
+                "USER"
+            ],
+            "icons": {
+                "16": "extension-16.png",
+                "48": "extension-48.png",
+                "128": "extension-128.png"
+            },
+            "view": "/public/tiles/$$$INTERNAL_NAME$$$/view.html?features=responsive,tile,core-v3"
+        }
+    ]
+}

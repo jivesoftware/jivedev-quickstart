@@ -1,0 +1,13 @@
+{
+    "package_version": "1.0",
+    "id": "$$$EXTENSION_UUID$$$",
+    "type": "client-app",
+    "name": "$$$DISPLAY_NAME$$$",
+    "description": "$$$DESCRIPTION$$$",
+    "minimum_version": "0000",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "service_url": "http:",
+    "redirect_url" : "%serviceURL%"
+}

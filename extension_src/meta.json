@@ -1,0 +1,17 @@
+{
+    "package_version": "1.0",
+    "id": "8daa6e1a-75d5-47b9-ae74-5c10661ff31b",
+    "type": "client-app",
+    "name": "jivedev QuickStart",
+    "description": "A Jive App to help you get started with simple Jive Tile, App and Stream development.",
+    "minimum_version": "0070300000",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "register_url": "%serviceURL%/jive/oauth/register",
+    "unregister_url": "%serviceURL%/jive/oauth/unregister",
+    "redirect_url": "%serviceURL%",
+    "released_on": "2016-12-14T13:57:39.551Z",
+    "service_url": "https://rashed.ngrok.io",
+    "suppressAddonRegistration": true
+}

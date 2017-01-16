@@ -1,0 +1,13 @@
+{
+  "jiveExtension": {
+    "id": "8daa6e1a-75d5-47b9-ae74-5c10661ff31b",
+    "uuid": "8daa6e1a-75d5-47b9-ae74-5c10661ff31b",
+    "name": "jivedev QuickStart",
+    "description": "A Jive App to help you get started with simple Jive Tile, App and Stream development.",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "releasedOn": "2016-12-14T13:57:39.551Z",
+    "suppressAddonRegistration": true
+  }
+}
