@@ -170,5 +170,10 @@ input, url {
             blobLink.innerHTML += " (not supported on this browser)";
         }
     }
+
+    $('#inputFile').change(()=>{
+        readURL($('#inputFile')[0]);
+    });
+
     gadgets.window.adjustHeight();
 </script>

@@ -57,17 +57,17 @@ function createZip() {
         zip.file("meta.json", JSON.stringify(meta,null,4));
 
         // public folder
-        zip.folder(`public/tiles/${addonName}`).file("view.html", _src.public.tiles[addonName].javascripts.view_html);
-        zip.folder(`public/tiles/${addonName}/javascripts`).file("view.js", _src.public.tiles[addonName].javascripts.view_js);
-        zip.folder(`public/tiles/${addonName}/javascripts`).file("main.js", _src.public.tiles[addonName].javascripts.main_js);
-        zip.folder(`public/tiles/${addonName}/stylesheets`).file("style.css", _src.public.tiles[addonName].javascripts.style_css);
+        zip.folder(`public/tiles/${addonName}`).file("view.html", _src.view_html);
+        zip.folder(`public/tiles/${addonName}/javascripts`).file("view.js", _src.view_js);
+        zip.folder(`public/tiles/${addonName}/javascripts`).file("main.js", _src.main_js);
+        zip.folder(`public/tiles/${addonName}/stylesheets`).file("style.css", _src.style_css);
 
         // i18n folder
-        zip.folder("i18n").file("en.properties", _src.i18n.en_properties);
-        zip.folder("i18n").file("root.properties", _src.i18n.root_properties);
+        zip.folder("i18n").file("en.properties", _src.en_properties);
+        zip.folder("i18n").file("root.properties", _src.root_properties);
 
         // data folder
-        zip.folder("data").file("eula.html", _src.i18n.eula_html);
+        zip.folder("data").file("eula.html", _src.eula_html);
 
         return zip;
     })
@@ -76,7 +76,7 @@ function createZip() {
         saveAs(blob, addonName + ".zip");
     })
     .catch((err) =>{
-        alert(err);
+        console.log(err);
     })
 }
 
@@ -130,17 +130,18 @@ function imageToDataUri(img, width, height) {
     ctx.drawImage(img, 0, 0, width, height);
 
     // encode image to data-uri with base64 version of compressed image
-    return canvas.toDataURL();
+    return canvas.toDataURL('image/png');
 }
 
 function base64ToDataUri(base64) {
     return 'data:image/png;base64,' + base64;
 }
 
-function resizeImage() {
-    var p16 = imageToDataUri(this, 16, 16);
-    var p48 = imageToDataUri(this, 48, 48);
-    var p128 = imageToDataUri(this, 128, 128);
+function resizeImage(image) {
+    var p16 = imageToDataUri(image, 16, 16);
+    console.log(p16);
+    var p48 = imageToDataUri(image, 48, 48);
+    var p128 = imageToDataUri(image, 128, 128);
 
     $("#image_upload_preview").attr("data-p16", p16.split(',')[1]);
     $("#image_upload_preview").attr("data-p48", p48.split(',')[1]);
@@ -148,7 +149,7 @@ function resizeImage() {
 }
 
 function readURL(input) {
-    if (input.files && input.files[0]) {
+    if (input[0].files && input[0].files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             var imgSrc = e.target.result;
@@ -156,11 +157,11 @@ function readURL(input) {
 
             var img = new Image;
 
-            img.onload = resizeImage;
+            img.onload = resizeImage(img);
             img.src =  $("#image_upload_preview").attr("src");
 
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(input[0].files[0]);
     }
 }
 
@@ -176,48 +177,43 @@ function bindEvent(el, eventName, eventHandler) {
 
 function getSourceFiles(addonName){
     // load static resources ajaxy (from same domain, so should be ok)
-    return new Promise((resolve, reject) =>{
         var src = {
-            'meta_json' : "",
-            'definition_json' : "",
-            'i18n' : {
-                'en_properties' : "",
-                'root_properties' : ""
-            },
-            'data' : {
-                'eula_html' : ""
-            },
-            'public' : {
-                'tiles' : {
-                }
-            }
+            'meta_json' : "meta.json",
+            'definition_json' : "definition.json",
+            'en_properties' : "en.properties",
+            'root_properties' : "root.properties",
+            'eula_html' : "eula.html",
+            'main_js' : "main.js"
         };
-        let viewhtml = $('#view_html').val(),
-            viewjs = $('#view_js').val(),
-            stylecss = $('#style_css').val();
 
-        src["public"]["tiles"][addonName] = {
-            'view_html' : viewhtml,
-            'javascripts' : { "view_js" : viewjs },
-            'stylesheets' : { "style_css" : stylecss}
-        }
-        console.log(src);
-        resolve(src);
-    })
-    .then((_src) =>{
-        console.log(_src);
-        osapi.http.get({
-            'href' : addonURL + '/src/meta.json'
-        }).execute((response) =>{
-            if(response.status === 200){
-                _src["meta_json"] = response.content;
-                console.log(_src);
-                return _src;
-            } else{
-                throw new Error('Failted to get meta.json');
-            }
+
+        let requestArray = [];
+        requestArray[requestArray.length] = traverse(src, (key, value, object) =>{
+            return new Promise((resolve, reject) =>{
+                if ( value && typeof value === 'string') {
+                    osapi.http.get({
+                        'href' : `${addonURL}/src/${value}`
+                    }).execute((response) =>{
+                        if(response.status === 200){
+                            object[key] = response.content;
+                            resolve();
+                        } else{
+                            reject(`Unable to get file ${value}`);
+                        }
+                    })
+                }
+            })
         })
-    })
+
+        return Promise.all(requestArray).then(() =>{
+            src["view_js"] = $('#view_js').val();
+            src["view_html"] = $('#view_html').val();
+            src["style_css"] = $('#style_css').val();
+            return(src);
+        })
+        .catch( err =>{
+            console.log(err);
+        })
 
 
     // return new Promise ((resolve, reject) =>{
