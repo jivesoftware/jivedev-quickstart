@@ -78,7 +78,7 @@
 
  </ModulePrefs>
 
-<Content type="html" view="createmenu-action-app" href="create-app.html" preferred_height="800" />
+<Content type="html" view="createmenu-action-oauth" href="create-oauth.html" preferred_height="800" />
 <Content type="html" view="createmenu-action-stream" href="create-stream.html" preferred_height="800" />
 <Content type="html" view="createmenu-action-tile" href="create-tile.html" preferred_height="800" />
 

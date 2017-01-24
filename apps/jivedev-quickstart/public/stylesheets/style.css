@@ -8,9 +8,15 @@ body {
     display: none;
 }
 
-h1, h2 {
+h1 {
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 4px;
 }
 
 ul {
@@ -20,14 +26,14 @@ ul {
 input,
 textarea {
    font: 14px 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-   height: 40px;
-   min-width: 500px;
+   height: 400px;
+   width: 85%;
 }
 
 input,
 text {
     height: 40px;
-    min-width: 500px;
+    width: 85%;
 }
 
 .j-code-block {
@@ -88,16 +94,38 @@ button {
 .builder{
     padding-top:40px;
 }
-article {
-    max-width:360px;
-    float: left;
-    padding: 0 12px 0 8px;
+
+.headingImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-aside {
-    padding-bottom: 20px;
+#description {
+    height: 100px;
 }
 
-#view_html, #style_css, #view_js {
-    height: 400px;
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 20px 0 40px 0;
+    justify-content: center;
+}
+
+.left {
+    min-width: 340px;
+    max-width: 500px;
+}
+
+.right {
+    margin-top: 6px;
+    padding-left: 30px;
+    width: 100%;
+}
+
+pre {
+    margin-top: 0px;
+    margin-bottom: 2px;
 }

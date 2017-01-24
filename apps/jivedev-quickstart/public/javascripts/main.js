@@ -1,86 +1,260 @@
-//encodeImage("sample-icon-128.png", function (dataURL) {
-//    src.data.sample_icon_128_png = dataURL;
-//    $(document).ready( function() {
-//        $("#image_upload_preview").attr("src", dataURL);
-//        resizeImage.call( $("#image_upload_preview")[0] );
-//    });
-//});
+// TO DO: Add in Jive App capability
+// If adding a new integration types, check/modify the asyncFileGetter and addDefinition functions
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var matches = window.location.href.match(/.*?[?&]url=([^&]+)%2F.*$/);  
+const matches = window.location.href.match(/.*?[?&]url=([^&]+)%2F.*$/);  
 const addonURL = decodeURIComponent(matches[1]);
 
-function createZip() {
-    var zip = new JSZip();
+$('#inputFile').change(()=>{
+    readURL($('#inputFile')[0]);
+    gadgets.window.adjustHeight();
+});
 
-    var addonTitle = $('#addon_name').val();
-    addonName = addonTitle || 'my-custom-view-tile';
-    addonName = addonName.replace(/[^a-z0-9]/gi, '-').toLowerCase();
-    var addonDescription = $('#description').val() || 'A example Custom View Tile built with the Custom View Tile App';
+const commonFiles = ["meta.json", "data/eula.html", "i18n/en.properties", "i18n/root.properties"];
+let additionalFiles = [];
 
-    var p16 = $("#image_upload_preview").attr("data-p16");
-    var p48 = $("#image_upload_preview").attr("data-p48");
-    var p128 = $("#image_upload_preview").attr("data-p128");
+const addDefinition = (integType) =>{
+    const common = {
+        "integrationUser": {
+            "systemAdmin": false
+        }
+    };
 
-    if ( p16 ) {
-        zip.folder("data").file("extension-16.png", p16, { base64: true});
+    let additional = {};
+
+    if(integType === "stream"){
+        additional = {
+            "tiles": 
+            [
+                {
+                    "displayName": "$$$DISPLAY_NAME$$$",
+                    "name": "$$$INTERNAL_NAME$$$",
+                    "description": "$$$DESCRIPTION$$$",
+                    "style": "ACTIVITY",
+                    "icons": {
+                        "16": "extension-16.png",
+                        "48": "extension-48.png",
+                        "128" : "extension-128.png"
+                    },
+                    "config": "/public/configuration.html?features=jq-1.11,core-v3,tile",
+                    "transform": {
+                        "script": "xform.js"
+                    },
+                    "pageTypes": [
+                        "PLACE",
+                        "MOBILE",
+                        "NEWS"
+                    ],
+                    "categories": [
+                        "other"
+                    ],
+                    "displayWidth": "ALL",
+                    "i18n": "*"
+                }
+            ]
+        }
+    } else if(integType === "tile"){
+        additional = {
+            "tiles": 
+            [{
+                "displayName": "$$$DISPLAY_NAME$$$",
+                "name": "$$$INTERNAL_NAME$$$",
+                "description": "$$$DESCRIPTION$$$",
+                "style": "CUSTOM_VIEW",
+                "displayWidth": "ALL",
+                "pageTypes": [
+                    "PLACE",
+                    "USER",
+                    "NEWS"
+                ],
+                "icons": {
+                    "16": "extension-16.png",
+                    "48": "extension-48.png",
+                    "128": "extension-128.png"
+                },
+                "view": "/public/tiles/$$$INTERNAL_NAME$$$/view.html?features=responsive,tile,core-v3"
+            }]
+        }
+    } else if(integType === "oauth"){
+        additional = {};
+    } else if(integType === "app") {
+        additional = {
+            "osapps": [
+                {
+                    "id": "$$$EXTENSION_UUID$$$",
+                    "name": "$$$INTERNAL_NAME$$$",
+                    "appPath": "$$$INTERNAL_NAME$$$",
+                    "url": "%serviceURL%/osapp/$$$INTERNAL_NAME$$$/app.xml"
+                }
+            ]
+        }
     }
-    if ( p48 ) {
-        zip.folder("data").file("extension-48.png", p48, { base64: true});
-    }
-    if ( p128 ) {
-        zip.folder("data").file("extension-128.png", p128, { base64: true});
-    }
-    getSourceFiles(addonName)
-    .then((_src) =>{
-        let meta = _src.meta_json;
-        let definition = _src.definition_json;
-        console.log("Creating zip contents...");
+    
+    Object.assign(common, additional);
+    let definition = JSON.stringify(common, null, 4);
+    return { 'definition.json' : definition };
+}
 
-        // Generate random UUID
-        meta.id = guid();
+const asyncFileGetter = (type, name, description)=>{
+    let promises = [];
 
-        traverse(_src, function(key, value, object) {
+    if (type === "stream"){
+        additionalFiles.push(`public/configuration.html`);
+        additionalFiles.push(`public/common.js`);
+        additionalFiles.push(`public/config-adaptor.js`);
+        additionalFiles.push(`public/diagnostics.js`);
+        additionalFiles.push(`public/main.js`);
+    } else if (type === "tile"){
+        additionalFiles.push(`public/tiles/${name}/javascripts/main.js`);
+    } else if (type === "oauth"){
+    } else if (type === "app"){
+        additionalFiles[`public/apps/${name}/app.xml`] = "app.xml";
+    } else {
+        promises.commonFiles.push(new Promise((resolve, reject) =>{
+            reject("Invalid integrationType selected in JS")
+        }));
+    };
+
+    commonFiles.forEach((value, index) =>{
+        promises.push(getSourceFile(value, name));
+    })
+
+    additionalFiles.forEach((value, index) =>{
+        promises.push(getSourceFile(value, name));
+    })
+
+    return Promise.all(promises).then((fetchedFiles) =>{
+        return fetchedFiles;
+    })
+};
+
+const getSourceFile = (filePath, addonName) =>{
+    return new Promise((resolve, reject) =>{
+        if ( filePath && typeof filePath === 'string') {
+            const sourceFilePath = filePath.replace(`${addonName}/`, "");
+            osapi.http.get({
+                'href' : `${addonURL}/src/${sourceFilePath}`
+            }).execute((response) =>{
+                if(response.status === 200){
+                    let obj = {};
+                    obj[filePath] = response.content;
+                    resolve(obj);
+                } else{
+                    reject(`Unable to get file ${sourceFilePath}`);
+                }
+            })
+        } else {
+            reject(`No file being requested or path to file not a string.\nFilepath ${filePath}`);
+        }
+    })
+}
+
+const getCustomFiles = (addonName) =>{
+    let customFiles = {};
+    for(let i=0; i <= 4; i++){
+        if($(`#custom_${i}`).length){
+            let path = $(`#custom_${i}`).attr('data-path');
+            if (path && typeof path === 'string'){
+                path = path.replace(/\$\$\$INTERNAL_NAME\$\$\$/g, addonName);
+                customFiles[path] = $(`#custom_${i}`).val();
+            }
+        }
+    }
+    return customFiles;
+}
+
+const getCustomParams = (files) =>{
+    for(let i=0; i <= 4; i++){
+        if($(`#custom_${i}`).length){
+            let param = $(`#custom_${i}`).attr('data-param');
+            let value = $(`#custom_${i}`).val();
+            if (param && typeof param === 'string'){
+                return processParams(files, param, value);
+            }
+        }
+    }
+    return files;
+}
+
+const processParams = (_src, strToReplace, replacementValue) =>{
+    _src.forEach((obj, index) =>{
+        traverse(obj, (key,value,object) =>{
             if ( value && typeof value === 'string') {
-                value = value.replace(/\$\$\$EXTENSION_UUID\$\$\$/g, meta["id"]);
-                value = value.replace(/\$\$\$DISPLAY_NAME\$\$\$/g, addonTitle);
-                value = value.replace(/\$\$\$INTERNAL_NAME\$\$\$/g, addonName);
-                value = value.replace(/\$\$\$DESCRIPTION\$\$\$/g, addonDescription);
+                value = value.replace(strToReplace, replacementValue);
                 object[key] = value;
             }
-        });
-
-        // Create meta and definition JSON files
-        zip.file("definition.json", JSON.stringify(definition,null,4));
-        zip.file("meta.json", JSON.stringify(meta,null,4));
-
-        // public folder
-        zip.folder(`public/tiles/${addonName}`).file("view.html", _src.view_html);
-        zip.folder(`public/tiles/${addonName}/javascripts`).file("view.js", _src.view_js);
-        zip.folder(`public/tiles/${addonName}/javascripts`).file("main.js", _src.main_js);
-        zip.folder(`public/tiles/${addonName}/stylesheets`).file("style.css", _src.style_css);
-
-        // i18n folder
-        zip.folder("i18n").file("en.properties", _src.en_properties);
-        zip.folder("i18n").file("root.properties", _src.root_properties);
-
-        // data folder
-        zip.folder("data").file("eula.html", _src.eula_html);
-
-        return zip;
+        })
     })
-    .then((zip) =>{
-        let blob = zip.generate({type:"blob"});
-        saveAs(blob, addonName + ".zip");
+    return _src;
+}
+
+const createZip = (files) =>{
+    let zip = new JSZip();
+
+    files.forEach((obj, index) =>{
+        traverse(obj, (key, value, object) =>{
+            let folderStr = key.substring(0, Math.max(key.lastIndexOf("/"), key.lastIndexOf("\\")));
+            let fileStr = key.split('\\').pop().split('/').pop();
+            if(folderStr !== ""){
+                zip.folder(folderStr).file(fileStr, value);
+            } else{
+                zip.file(fileStr, value);
+            }
+        })
+    })
+
+    let blob = zip.generate({type:"blob"});
+    saveAs(blob, addonName + ".zip");
+}
+
+const startZip = (integrationType) =>{    
+    let addonTitle = $('#addon_name').val();
+    addonName = addonTitle || 'my-custom-view-tile';
+    addonName = addonName.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    let addonDescription = $('#description').val() || 'A example Jive Add-on built with the Jive Quickstart App';
+
+    asyncFileGetter(integrationType, addonName, description)
+    .then((files) =>{
+        files.push(getCustomFiles(addonName))
+        return files;
+    })
+    .then((files) =>{
+        files.push(addDefinition(integrationType));
+        return files;
+    })
+    .then((files) =>{
+        return getCustomParams(files);
+    })
+    .then((files) =>{
+        let id = guid();
+        let replacers = {
+            "$$$DESCRIPTION$$$" : addonDescription,
+            "$$$DISPLAY_NAME$$$" : addonTitle,
+            "$$$INTERNAL_NAME$$$" : addonName,
+            "$$$EXTENSION_UUID$$$" : id,
+            "$$$REDIRECT_URL$$$" : "%serviceURL%"
+        }
+
+       for (var prop in replacers) {
+            // skip loop if the property is from prototype
+            if(!replacers.hasOwnProperty(prop)) continue;
+                processParams(files, prop, replacers[prop]);
+        }
+
+        return files;
+
+    })
+    .then((files) =>{
+        createZip(files);
     })
     .catch((err) =>{
         console.log(err);
     })
 }
 
-var guid = (function() {
+const guid = (function() {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
@@ -92,7 +266,7 @@ var guid = (function() {
     };
 })();
 
-function traverse(o,func) {
+const traverse = (o,func) =>{
     for (var i in o) {
         func.apply(this,[i,o[i], o]);
         if (o[i] !== null && typeof(o[i])=="object") {
@@ -102,7 +276,15 @@ function traverse(o,func) {
     }
 }
 
-function encodeImage(imageUri, callback) {
+const isEmpty = (obj) =>{
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+const encodeImage = (imageUri, callback) =>{
     var c = document.createElement('canvas');
     var ctx = c.getContext("2d");
     var img = new Image();
@@ -116,12 +298,12 @@ function encodeImage(imageUri, callback) {
     img.src = imageUri;
 }
 
-function imageToDataUri(img, width, height) {
+const imageToDataUri = (img, width, height) =>{
 
     // create an off-screen canvas
     var canvas = document.createElement('canvas'),
         ctx = canvas.getContext('2d');
-
+        console.log($('canvas'));
     // set its dimension to target size
     canvas.width = width;
     canvas.height = height;
@@ -137,7 +319,7 @@ function base64ToDataUri(base64) {
     return 'data:image/png;base64,' + base64;
 }
 
-function resizeImage(image) {
+const resizeImage = (image) =>{
     var p16 = imageToDataUri(image, 16, 16);
     console.log(p16);
     var p48 = imageToDataUri(image, 48, 48);
@@ -148,7 +330,7 @@ function resizeImage(image) {
     $("#image_upload_preview").attr("data-p128", p128.split(',')[1]);
 }
 
-function readURL(input) {
+const readURL = (input) =>{
     if (input[0].files && input[0].files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -173,141 +355,4 @@ function bindEvent(el, eventName, eventHandler) {
         // old IE
         el.attachEvent('on'+eventName, eventHandler);
     }
-}
-
-function getSourceFiles(addonName){
-    // load static resources ajaxy (from same domain, so should be ok)
-        var src = {
-            'meta_json' : "meta.json",
-            'definition_json' : "definition.json",
-            'en_properties' : "en.properties",
-            'root_properties' : "root.properties",
-            'eula_html' : "eula.html",
-            'main_js' : "main.js"
-        };
-
-
-        let requestArray = [];
-        requestArray[requestArray.length] = traverse(src, (key, value, object) =>{
-            return new Promise((resolve, reject) =>{
-                if ( value && typeof value === 'string') {
-                    osapi.http.get({
-                        'href' : `${addonURL}/src/${value}`
-                    }).execute((response) =>{
-                        if(response.status === 200){
-                            object[key] = response.content;
-                            resolve();
-                        } else{
-                            reject(`Unable to get file ${value}`);
-                        }
-                    })
-                }
-            })
-        })
-
-        return Promise.all(requestArray).then(() =>{
-            src["view_js"] = $('#view_js').val();
-            src["view_html"] = $('#view_html').val();
-            src["style_css"] = $('#style_css').val();
-            return(src);
-        })
-        .catch( err =>{
-            console.log(err);
-        })
-
-
-    // return new Promise ((resolve, reject) =>{
-    //     let src = {
-    //         'i18n' : {},
-    //         'data' : {},
-    //         'public' : {
-    //             'tiles' : {
-    //             }
-    //         }
-    //     };
-
-    //     let viewhtml = $('#view_html').val(),
-    //         viewjs = $('#view_js').val(),
-    //         stylecss = $('#style_css').val();
-
-    //     src.public.tiles[addonName] = {
-    //         'view_html' : viewhtml,
-    //         'javascripts' : { "view_js" : viewjs },
-    //         'stylesheets' : { "style_css" : stylecss}
-    //     }
-    //     console.log(src);
-    //     resolve(src);
-    // })
-    // .then((_src) =>{
-    //     osapi.http.get({
-    //         'href' : addonURL + '/src/meta.json'
-    //     }).execute((response) =>{
-    //         if(response.status === 200){
-    //             _src["meta_json"] = response.content;
-    //             return _src;
-    //         } else{
-    //             throw new Error('Failted to get meta.json');
-    //         }
-    //     })
-    // })
-    // .then((_src) =>{
-    //     osapi.http.get({
-    //         'href' : addonURL + '/src/definition.json'
-    //     }).execute((response) =>{
-    //         if(response.status === 200){
-    //             _src.definition_json = response.content;
-    //             return _src;
-    //         } else{
-    //             throw new Error('Failted to get definition.json');
-    //         }
-    //     })
-    // })
-    // .then((_src) =>{
-    //     osapi.http.get({
-    //         'href' : addonURL + '/src/public/main.js'
-    //     }).execute((response) =>{
-    //         if(response.status === 200){
-    //             _src.public.main_js = response.content;
-    //             return _src;
-    //         } else{
-    //             throw new Error('Failted to get main.js');
-    //         }
-    //     })
-    // })
-    // .then((_src) =>{
-    //     osapi.http.get({
-    //         'href' : addonURL + '/src/data/eula.html'
-    //     }).execute((response) =>{
-    //         if(response.status === 200){
-    //             _src.data.eula_html = response.content;
-    //             return _src;
-    //         } else{
-    //             throw new Error('Failted to get eula.html');
-    //         }
-    //     })
-    // })
-    // .then((_src) =>{
-    //     osapi.http.get({
-    //         'href' : addonURL + '/src/i18n/root.properties'
-    //     }).execute((response) =>{
-    //         if(response.status === 200){
-    //             _src.i18n.root_properties = response.content;
-    //             return _src;
-    //         } else{
-    //             throw new Error('Failted to get root.properties');
-    //         }
-    //     })
-    // })
-    // .then((_src) =>{
-    //     osapi.http.get({
-    //         'href' : addonURL + '/src/i18n/en.properties'
-    //     }).execute((response) =>{
-    //         if(response.status === 200){
-    //             _src.i18n.en_properties = response.content;
-    //             return _src;
-    //         } else{
-    //             throw new Error('Failted to get en.properties');
-    //         }
-    //     })
-    // })
 }
