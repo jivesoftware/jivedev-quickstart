@@ -106,6 +106,8 @@ const asyncFileGetter = (type, name, description)=>{
         additionalFiles.push(`public/config-adaptor.js`);
         additionalFiles.push(`public/diagnostics.js`);
         additionalFiles.push(`public/main.js`);
+        additionalFiles.push(`public/style-ssi.css`);
+        additionalFiles.push(`public/jive-ee.css`);
     } else if (type === "tile"){
         additionalFiles.push(`public/tiles/${name}/javascripts/main.js`);
     } else if (type === "oauth"){
@@ -315,7 +317,7 @@ const imageToDataUri = (img, width, height) =>{
     return canvas.toDataURL('image/png');
 }
 
-function base64ToDataUri(base64) {
+const base64ToDataUri = (base64) =>{
     return 'data:image/png;base64,' + base64;
 }
 
@@ -347,7 +349,7 @@ const readURL = (input) =>{
     }
 }
 
-function bindEvent(el, eventName, eventHandler) {
+const bindEvent = (el, eventName, eventHandler) =>{
     if (el.addEventListener){
         // standard way
         el.addEventListener(eventName, eventHandler, false);
