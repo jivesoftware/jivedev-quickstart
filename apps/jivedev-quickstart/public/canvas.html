@@ -152,6 +152,13 @@ callback({ "activity" : activityInfo });
         }
     }
 
-    gadgets.window.adjustHeight();
+
+    const adjustDimensions = ()=>{
+      setTimeout(()=>{
+        gadgets.window.adjustHeight();
+        gadgets.window.adjustWidth();
+      },250);
+    }
+    gadgets.util.registerOnLoadHandler(adjustDimensions());
 </script>
 </html>

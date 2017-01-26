@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-
     $('#run-transform').click(function() {
         var input_data = $('textarea#tx_input').val();
         var xform_func = $('textarea#custom_0').val();
@@ -111,6 +109,4 @@ $(document).ready(function() {
             throw new Error('"activity.object.title" should be a string.');
         }
     }
-
-    $("#custom_0").focus();
 });

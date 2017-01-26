@@ -1,7 +1,17 @@
 body {
     color: #5e5e5e;
     font: 16px 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-    margin: 50px;
+    width: 1024px;
+}
+
+.wrapper {
+    display: block;
+    width: 100%;
+    overflow: scroll;
+    height: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    min-height: 500px;
 }
 
 .j-card, .hidden, #test_transform_div {
@@ -128,4 +138,8 @@ button {
 pre {
     margin-top: 0px;
     margin-bottom: 2px;
+}
+
+.nav {
+    height: 30px;
 }

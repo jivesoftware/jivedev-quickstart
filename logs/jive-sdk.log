@@ -1,46 +1,44 @@
-[2017-01-24 17:02:55.235] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/bootstrap-30.min.js to extension.zip  :  public/javascripts/bootstrap-30.min.js
-[2017-01-24 17:02:55.240] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/bootstrap.min.js to extension.zip  :  public/javascripts/bootstrap.min.js
-[2017-01-24 17:02:55.245] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jQuery-1.10.2.js to extension.zip  :  public/javascripts/jQuery-1.10.2.js
-[2017-01-24 17:02:55.246] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jquery-1.8.3.js to extension.zip  :  public/javascripts/jquery-1.8.3.js
-[2017-01-24 17:02:55.246] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jquery.base64.min.js to extension.zip  :  public/javascripts/jquery.base64.min.js
-[2017-01-24 17:02:55.250] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap-30.css to extension.zip  :  public/stylesheets/bootstrap-30.css
-[2017-01-24 17:02:55.251] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap-30.min.css to extension.zip  :  public/stylesheets/bootstrap-30.min.css
-[2017-01-24 17:02:55.251] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap.css to extension.zip  :  public/stylesheets/bootstrap.css
-[2017-01-24 17:02:55.255] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap.min.css to extension.zip  :  public/stylesheets/bootstrap.min.css
-[2017-01-24 17:02:55.256] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/style.css to extension.zip  :  public/stylesheets/style.css
-[2017-01-24 17:02:55.273] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/.DS_Store
-[2017-01-24 17:02:55.273] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/app.xml to extension.zip  :  public/apps/jivedev-quickstart/app.xml
-[2017-01-24 17:02:55.274] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/canvas.html to extension.zip  :  public/apps/jivedev-quickstart/canvas.html
-[2017-01-24 17:02:55.275] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/create-app.html to extension.zip  :  public/apps/jivedev-quickstart/create-app.html
-[2017-01-24 17:02:55.276] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/create-stream.html to extension.zip  :  public/apps/jivedev-quickstart/create-stream.html
-[2017-01-24 17:02:55.280] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/create-tile.html to extension.zip  :  public/apps/jivedev-quickstart/create-tile.html
-[2017-01-24 17:02:55.281] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/developer_icon.png to extension.zip  :  public/apps/jivedev-quickstart/developer_icon.png
-[2017-01-24 17:02:55.283] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/sample-icon-128.png to extension.zip  :  public/apps/jivedev-quickstart/sample-icon-128.png
-[2017-01-24 17:02:55.322] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/images/icon128.png to extension.zip  :  public/apps/jivedev-quickstart/images/icon128.png
-[2017-01-24 17:02:55.322] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/images/icon16.png to extension.zip  :  public/apps/jivedev-quickstart/images/icon16.png
-[2017-01-24 17:02:55.322] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/images/icon48.png to extension.zip  :  public/apps/jivedev-quickstart/images/icon48.png
-[2017-01-24 17:02:55.323] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/javascripts/.DS_Store
-[2017-01-24 17:02:55.324] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/FileSaver.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/FileSaver.js
-[2017-01-24 17:02:55.324] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jquery-1.12.4.min.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jquery-1.12.4.min.js
-[2017-01-24 17:02:55.325] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jszip-utils-ie.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jszip-utils-ie.js
-[2017-01-24 17:02:55.325] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jszip-utils.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jszip-utils.js
-[2017-01-24 17:02:55.326] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jszip.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jszip.js
-[2017-01-24 17:02:55.326] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/main.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/main.js
-[2017-01-24 17:02:55.328] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/locales/all_ALL.xml to extension.zip  :  public/apps/jivedev-quickstart/locales/all_ALL.xml
-[2017-01-24 17:02:55.328] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/locales/en_ALL.xml to extension.zip  :  public/apps/jivedev-quickstart/locales/en_ALL.xml
-[2017-01-24 17:02:55.329] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/src/.DS_Store
-[2017-01-24 17:02:55.329] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/definition.json to extension.zip  :  public/apps/jivedev-quickstart/src/definition.json
-[2017-01-24 17:02:55.330] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/meta.json to extension.zip  :  public/apps/jivedev-quickstart/src/meta.json
-[2017-01-24 17:02:55.331] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/stylesheets/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/stylesheets/.DS_Store
-[2017-01-24 17:02:55.331] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/stylesheets/style.css to extension.zip  :  public/apps/jivedev-quickstart/stylesheets/style.css
-[2017-01-24 17:02:55.337] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/data/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/src/data/.DS_Store
-[2017-01-24 17:02:55.338] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/data/eula.html to extension.zip  :  public/apps/jivedev-quickstart/src/data/eula.html
-[2017-01-24 17:02:55.338] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/i18n/en.properties to extension.zip  :  public/apps/jivedev-quickstart/src/i18n/en.properties
-[2017-01-24 17:02:55.339] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/i18n/root.properties to extension.zip  :  public/apps/jivedev-quickstart/src/i18n/root.properties
-[2017-01-24 17:02:55.339] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/public/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/src/public/.DS_Store
-[2017-01-24 17:02:55.340] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/public/main.js to extension.zip  :  public/apps/jivedev-quickstart/src/public/main.js
-[2017-01-24 17:02:55.530] [INFO] jive-sdk - Bootstrap complete.
-[2017-01-24 17:02:55.530] [INFO] jive-sdk - Jive SDK version 0.2.10
-[2017-01-24 17:02:55.530] [INFO] jive-sdk - Started service in  self-contained mode
-[2017-01-24 17:02:55.530] [INFO] jive-sdk - Service started in development mode
-[2017-01-24 17:03:09.954] [INFO] jive-sdk - Updated 1 data file(s): [jiveExtension]
+[2017-01-25 14:27:27.051] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jQuery-1.10.2.js to extension.zip  :  public/javascripts/jQuery-1.10.2.js
+[2017-01-25 14:27:27.052] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jquery-1.8.3.js to extension.zip  :  public/javascripts/jquery-1.8.3.js
+[2017-01-25 14:27:27.052] [DEBUG] jive-sdk - Zipping extension_src/public/javascripts/jquery.base64.min.js to extension.zip  :  public/javascripts/jquery.base64.min.js
+[2017-01-25 14:27:27.052] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap-30.css to extension.zip  :  public/stylesheets/bootstrap-30.css
+[2017-01-25 14:27:27.053] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap-30.min.css to extension.zip  :  public/stylesheets/bootstrap-30.min.css
+[2017-01-25 14:27:27.054] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap.css to extension.zip  :  public/stylesheets/bootstrap.css
+[2017-01-25 14:27:27.054] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/bootstrap.min.css to extension.zip  :  public/stylesheets/bootstrap.min.css
+[2017-01-25 14:27:27.055] [DEBUG] jive-sdk - Zipping extension_src/public/stylesheets/style.css to extension.zip  :  public/stylesheets/style.css
+[2017-01-25 14:27:27.062] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/.DS_Store
+[2017-01-25 14:27:27.062] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/app.xml to extension.zip  :  public/apps/jivedev-quickstart/app.xml
+[2017-01-25 14:27:27.063] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/canvas.html to extension.zip  :  public/apps/jivedev-quickstart/canvas.html
+[2017-01-25 14:27:27.064] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/create-app.html to extension.zip  :  public/apps/jivedev-quickstart/create-app.html
+[2017-01-25 14:27:27.066] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/create-stream.html to extension.zip  :  public/apps/jivedev-quickstart/create-stream.html
+[2017-01-25 14:27:27.066] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/create-tile.html to extension.zip  :  public/apps/jivedev-quickstart/create-tile.html
+[2017-01-25 14:27:27.067] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/developer_icon.png to extension.zip  :  public/apps/jivedev-quickstart/developer_icon.png
+[2017-01-25 14:27:27.068] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/sample-icon-128.png to extension.zip  :  public/apps/jivedev-quickstart/sample-icon-128.png
+[2017-01-25 14:27:27.085] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/images/icon128.png to extension.zip  :  public/apps/jivedev-quickstart/images/icon128.png
+[2017-01-25 14:27:27.085] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/images/icon16.png to extension.zip  :  public/apps/jivedev-quickstart/images/icon16.png
+[2017-01-25 14:27:27.086] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/images/icon48.png to extension.zip  :  public/apps/jivedev-quickstart/images/icon48.png
+[2017-01-25 14:27:27.086] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/javascripts/.DS_Store
+[2017-01-25 14:27:27.087] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/FileSaver.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/FileSaver.js
+[2017-01-25 14:27:27.087] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jquery-1.12.4.min.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jquery-1.12.4.min.js
+[2017-01-25 14:27:27.088] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jszip-utils-ie.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jszip-utils-ie.js
+[2017-01-25 14:27:27.088] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jszip-utils.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jszip-utils.js
+[2017-01-25 14:27:27.089] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/jszip.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/jszip.js
+[2017-01-25 14:27:27.089] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/javascripts/main.js to extension.zip  :  public/apps/jivedev-quickstart/javascripts/main.js
+[2017-01-25 14:27:27.090] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/locales/all_ALL.xml to extension.zip  :  public/apps/jivedev-quickstart/locales/all_ALL.xml
+[2017-01-25 14:27:27.090] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/locales/en_ALL.xml to extension.zip  :  public/apps/jivedev-quickstart/locales/en_ALL.xml
+[2017-01-25 14:27:27.090] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/src/.DS_Store
+[2017-01-25 14:27:27.091] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/definition.json to extension.zip  :  public/apps/jivedev-quickstart/src/definition.json
+[2017-01-25 14:27:27.091] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/meta.json to extension.zip  :  public/apps/jivedev-quickstart/src/meta.json
+[2017-01-25 14:27:27.101] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/stylesheets/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/stylesheets/.DS_Store
+[2017-01-25 14:27:27.102] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/stylesheets/style.css to extension.zip  :  public/apps/jivedev-quickstart/stylesheets/style.css
+[2017-01-25 14:27:27.116] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/data/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/src/data/.DS_Store
+[2017-01-25 14:27:27.116] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/data/eula.html to extension.zip  :  public/apps/jivedev-quickstart/src/data/eula.html
+[2017-01-25 14:27:27.117] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/i18n/en.properties to extension.zip  :  public/apps/jivedev-quickstart/src/i18n/en.properties
+[2017-01-25 14:27:27.117] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/i18n/root.properties to extension.zip  :  public/apps/jivedev-quickstart/src/i18n/root.properties
+[2017-01-25 14:27:27.118] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/public/.DS_Store to extension.zip  :  public/apps/jivedev-quickstart/src/public/.DS_Store
+[2017-01-25 14:27:27.120] [DEBUG] jive-sdk - Zipping extension_src/public/apps/jivedev-quickstart/src/public/main.js to extension.zip  :  public/apps/jivedev-quickstart/src/public/main.js
+[2017-01-25 14:27:27.247] [INFO] jive-sdk - Bootstrap complete.
+[2017-01-25 14:27:27.247] [INFO] jive-sdk - Jive SDK version 0.2.10
+[2017-01-25 14:27:27.248] [INFO] jive-sdk - Started service in  self-contained mode
+[2017-01-25 14:27:27.248] [INFO] jive-sdk - Service started in development mode
+[2017-01-25 14:27:41.852] [INFO] jive-sdk - Updated 1 data file(s): [jiveExtension]

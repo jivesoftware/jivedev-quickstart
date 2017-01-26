@@ -20,79 +20,60 @@
     <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="javascripts/FileSaver.js"></script>
     <script type="text/javascript" src="javascripts/main.js"></script>
+    <script>
+        // Set integration type here — either "tile", "stream" or "oauth"
+        // TO DO: Create one for app
+        let integType = "oauth";
+    </script>
 </head>
 
 <body>
-    <img class="headingImage" src="developer_icon.png" />
-    <h1>OAuth Add-on Builder</h1>
-    <img class="headingImage" src="authenticators.png" alt="authenticators" />
-    <p>Quickly build an OAuth 2.0 client that enables you to get an OAuth access and refresh token for your Jive instance with this form. The access token provides controlled API access to content in Jive to a third-party service. For more information on gaining an access token with <a href="https://community.jivesoftware.com/docs/DOC-175308#jive_content_id_Using_Authorization_Code_Grant" target="_blank">Authorization Code Grant</a>, <a href="https://community.jivesoftware.com/docs/DOC-175308#jive_content_id_Using_Resource_Owner_Password_Credentials_Grant" target="_blank">Resource Owner Password Credentials Grant</a> and more, check out the <a href="https://community.jivesoftware.com/community/developer/">Jive Developer Community</a>.</p>
-    <div class="builder">
-        <hr />
-        <div class="container">
-            <div class="left"><h2>Title</h2>Enter the unique title you want to give your Addon.
+    <div class="wrapper">
+        <img class="headingImage" src="developer_icon.png" />
+        <h1>OAuth Add-on Builder</h1>
+        <img class="headingImage" src="authenticators.png" alt="authenticators" />
+        <p>Quickly build an OAuth 2.0 client that enables you to get an OAuth access and refresh token for your Jive instance with this form. The access token provides controlled API access to content in Jive to a third-party service. For more information on gaining an access token with <a href="https://community.jivesoftware.com/docs/DOC-175308#jive_content_id_Using_Authorization_Code_Grant" target="_blank">Authorization Code Grant</a>, <a href="https://community.jivesoftware.com/docs/DOC-175308#jive_content_id_Using_Resource_Owner_Password_Credentials_Grant" target="_blank">Resource Owner Password Credentials Grant</a> and more, check out the <a href="https://community.jivesoftware.com/community/developer/">Jive Developer Community</a>.</p>
+        <div class="builder">
+            <hr />
+            <div class="container">
+                <div class="left"><h2>Title</h2>Enter the unique title you want to give your Addon.
+                </div>
+                <div class="right">
+                    <input type="text" id="addon_name" value="My OAuth 2.0 Addon" />
+                </div>
             </div>
-            <div class="right">
-                <input type="text" id="addon_name" value="My OAuth 2.0 Addon" />
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="left"><h2>Description</h2>Give your tile a description which can be viewed in the add-on installation page.
+            <div class="container">
+                <div class="left"><h2>Description</h2>Give your tile a description which can be viewed in the add-on installation page.
+                </div>
+                <div class="right">
+                    <textarea id="description">This is my add-on for OAuth tokens.</textarea>
+                </div>
             </div>
-            <div class="right">
-                <textarea id="description">This is my add-on for OAuth tokens.</textarea>
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="left"><h2>Redirect URI/URL</h2> user allows authorization, Jive will redirect to user back to the redirect uri after successfully validating the client id and secret.
+            <div class="container">
+                <div class="left"><h2>Redirect URI/URL</h2> user allows authorization, Jive will redirect to user back to the redirect uri after successfully validating the client id and secret.
+                </div>
+                <div class="right">
+                    <input id="custom_0" type="url" required pattern="https?://.+" data-param = "$$$REDIRECT_URL$$$">
+                </div>
             </div>
-            <div class="right">
-                <input id="custom_0" type="url" required pattern="https?://.+" data-param = "$$$REDIRECT_URL$$$">
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="left"><h2>Icon</h2>Pick a square image that is at least 128px X 128px for your add-on.
+            <div class="container">
+                <div class="left"><h2>Icon</h2>Pick a square image that is at least 128px X 128px for your add-on.
+                </div>
+                <div class="right">
+                    <form id="form1" runat="server">
+                        <input type='file' id="inputFile" />
+                        <img id="image_upload_preview" src="sample-icon-128.png" alt="your image" width="128px"/>
+                    </form>
+                </div>
             </div>
-            <div class="right">
-                <form id="form1" runat="server">
-                    <input type='file' id="inputFile" />
-                    <img id="image_upload_preview" src="sample-icon-128.png" alt="your image" width="128px"/>
-                </form>
-            </div>
-        </div>
 
-        <br /><hr /><br />
-        <button id="blob" class="btn btn-primary">Download Add-on</button>
-        <p>After downloading this add-on package, upload it into your Jive community. Check out BLANK for more information.</p>
+            <br /><hr /><br />
+            <button id="blob" class="btn btn-primary">Download Add-on</button>
+            <p>After downloading this add-on package, upload it into your Jive community. Check out BLANK for more information.</p>
+        </div>
     </div>
 </body>
-<script>
-    // Set integration type here — either "tile", "stream" or "oauth"
-    let integType = "oauth";
-
-    // Blob
-    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
-        $("#j-notice").html("<br>For Safari browsers, the file will download with a name like <b>Unknown</b>. " +
-                "You can upload this straightaway to your Jive instance, or rename name the file with a .zip extension to easily view its contents.");
-        $('#blob').click( function() {
-            window.location = "data:application/zip;base64," + startZip(integType);
-        } );
-    } else {
-        // other
-        // safari
-        var blobLink = document.getElementById('blob');
-        if (JSZip.support.blob) {
-            $('#blob').click( function() {
-                startZip(integType);
-            } );
-        } else {
-            blobLink.innerHTML += " (not supported on this browser)";
-        }
-    }
-
-    gadgets.window.adjustHeight();
-</script>
 </html>

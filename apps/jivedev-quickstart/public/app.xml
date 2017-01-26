@@ -54,10 +54,10 @@
 		    <Param name="action-contributions">
    			<![CDATA[
 
-           <action id="com.jivesoftware.quickstart.createmenu.action.app"
+           <action id="com.jivesoftware.quickstart.createmenu.action.oauth"
                    path="jive/actions/navmenu"
-                   label="QuickStart (Jive App)"
-                   view="createmenu-action-app"/>
+                   label="QuickStart (Jive OAuth)"
+                   view="createmenu-action-oauth"/>
 
            <action id="com.jivesoftware.quickstart.createmenu.action.tile"
                    path="jive/actions/navmenu"

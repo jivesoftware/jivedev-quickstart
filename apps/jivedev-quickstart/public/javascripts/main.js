@@ -97,7 +97,7 @@ const addDefinition = (integType) =>{
     return { 'definition.json' : definition };
 }
 
-const asyncFileGetter = (type, name, description)=>{
+const asyncFileGetter = (type, name, description )=>{
     let promises = [];
 
     if (type === "stream"){
@@ -358,3 +358,32 @@ const bindEvent = (el, eventName, eventHandler) =>{
         el.attachEvent('on'+eventName, eventHandler);
     }
 }
+
+
+// Blob
+if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+    $("#j-notice").html("<br>For Safari browsers, the file will download with a name like <b>Unknown</b>. " +
+            "You can upload this straightaway to your Jive instance, or rename name the file with a .zip extension to easily view its contents.");
+    $('#blob').click( function() {
+        window.location = "data:application/zip;base64," + startZip(integType);
+    } );
+} else {
+    // other
+    // safari
+    var blobLink = document.getElementById('blob');
+    if (JSZip.support.blob) {
+        $('#blob').click( function() {
+            startZip(integType);
+        } );
+    } else {
+        blobLink.innerHTML += " (not supported on this browser)";
+    }
+}
+
+const adjustDimensions = ()=>{
+    setTimeout(()=>{
+    gadgets.window.adjustHeight();
+    gadgets.window.adjustWidth();
+    },250);
+}
+gadgets.util.registerOnLoadHandler(adjustDimensions);
