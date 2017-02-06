@@ -3,9 +3,9 @@
 -->
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-  <script type="text/javascript" src="javascripts/jszip.js"></script>
-  <script type="text/javascript" src="javascripts/jszip-utils.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <script type="text/javascript" src="javascripts/jszip.js"></script>
+    <script type="text/javascript" src="javascripts/jszip-utils.js"></script>
   <!--
   Mandatory in IE 6, 7, 8 and 9.
   -->
@@ -17,10 +17,19 @@
   Any version of jQuery will do (it's just to write some examples), this one
   happens to be available in our tests.
   -->
-  <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="javascripts/FileSaver.js"></script>
-  <script type="text/javascript" src="javascripts/main.js"></script>
-  <script type="text/javascript" src="javascripts/xform-validator.js"></script>
+    <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="javascripts/FileSaver.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
+    <script type="text/javascript" src="javascripts/xform-validator.js"></script>
+    <script id="navigation-template" type="text/x-handlebars-template">
+        <div class="nav">
+            <ul>
+            {{#navigation main}}
+                <a href="{{href}}">{{label}}
+            {{/navigation}}
+            </ul>
+        </div>
+    </script>
 </head>
 
 <body>

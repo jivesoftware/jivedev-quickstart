@@ -18,18 +18,22 @@
     happens to be available in our tests.
     -->
     <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="javascripts/navigation.js"></script>
     <script type="text/javascript" src="javascripts/FileSaver.js"></script>
     <script type="text/javascript" src="javascripts/main.js"></script>
-    <script type="text/javascript" src="javascripts/xform-validator.js"></script>
     <script>
         // Set integration type here — either "tile", "stream" or "oauth"
         let integType = "stream";
+
+        // If there are any additional files to be added other than the default files, use the following
+        // additionalFiles.push("{{FILE_PATH}}");
     </script>
 </head>
 
 <body>
     <div class="wrapper">
-        <img class="headingImage" src="developer_icon.png" />
+        <div class="main_nav"></div>
         <h1>Simple Stream Integration Builder</h1>
         Build your first simple stream integration in minutes! This form helps you create an add-on containing a Jive Simple Stream Integration. A Simple Stream Integration is an integration between a third party webhook provider and Jive. For more details on using this feature, refer to the <a href="https://community.jivesoftware.com/community/developer/blog/2015/08/04/how-to-using-the-simple-stream-integration-builder">Dev Tools series</a> in the Jive Community.
     <p style="font-size: 14px;"><em>Disclaimer: Simple Stream Integration Builder only works with Jive Cloud and Jive 9.</em></p>

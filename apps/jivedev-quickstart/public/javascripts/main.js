@@ -7,14 +7,20 @@
 const matches = window.location.href.match(/.*?[?&]url=([^&]+)%2F.*$/);  
 const addonURL = decodeURIComponent(matches[1]);
 
+// When an image file is selected for upload, the window needs to be resized begin the 
+// process of resizing the image and converting to Base64
 $('#inputFile').change(()=>{
     readURL($('#inputFile')[0]);
     gadgets.window.adjustHeight();
 });
 
+// These files are universal to all addons that are packaged
 const commonFiles = ["meta.json", "data/eula.html", "i18n/en.properties", "i18n/root.properties"];
+// This variable holds any files that are specific to the integration type and others specified
 let additionalFiles = [];
 
+// This function puts the definition.json together for the integration type
+// Returns an object with the filename as the key and the file contents as value
 const addDefinition = (integType) =>{
     const common = {
         "integrationUser": {
@@ -97,6 +103,10 @@ const addDefinition = (integType) =>{
     return { 'definition.json' : definition };
 }
 
+// This function puts together the files needed for the integration into additionalFiles
+// Calls getSourceFile() with the files specified in commonFiles and additionalFiles
+// Calls are non-sequential blocking for fastest loading
+// Returns a promise once all the promises (OSAPI HTTP Get requests) are resolved
 const asyncFileGetter = (type, name, description )=>{
     let promises = [];
 
@@ -132,6 +142,9 @@ const asyncFileGetter = (type, name, description )=>{
     })
 };
 
+// Performs a OSAPI HTTP GET for each file needed for the packaged
+// Should have all files located in the /src directory
+// Returns a promise
 const getSourceFile = (filePath, addonName) =>{
     return new Promise((resolve, reject) =>{
         if ( filePath && typeof filePath === 'string') {
@@ -153,6 +166,8 @@ const getSourceFile = (filePath, addonName) =>{
     })
 }
 
+// Any files in the page's form that needs to be included
+// Uses the 'data-path' attribute in the HTML element
 const getCustomFiles = (addonName) =>{
     let customFiles = {};
     for(let i=0; i <= 4; i++){
@@ -167,6 +182,10 @@ const getCustomFiles = (addonName) =>{
     return customFiles;
 }
 
+// Any custom parameters that need to be replaced in the code
+// Finds the 'data-param' attribute in the HTML element
+// Will look for the attribute value as the string to replace
+// e.g. "$$$REDIRECT_URL$$$"
 const getCustomParams = (files) =>{
     for(let i=0; i <= 4; i++){
         if($(`#custom_${i}`).length){
@@ -180,6 +199,7 @@ const getCustomParams = (files) =>{
     return files;
 }
 
+// Takes the custom parameters and replaces the strings with the values specified in the form field
 const processParams = (_src, strToReplace, replacementValue) =>{
     _src.forEach((obj, index) =>{
         traverse(obj, (key,value,object) =>{
@@ -192,6 +212,7 @@ const processParams = (_src, strToReplace, replacementValue) =>{
     return _src;
 }
 
+// Uses the JSZip library to create the archive's blob
 const createZip = (files) =>{
     let zip = new JSZip();
 
@@ -211,6 +232,41 @@ const createZip = (files) =>{
     saveAs(blob, addonName + ".zip");
 }
 
+// Generate a random UUID for the integration
+const guid = (function() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return function() {
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+    };
+})();
+
+// Used to iterate through a object and perform actions in a defined callback
+const traverse = (o,func) =>{
+    for (var i in o) {
+        func.apply(this,[i,o[i], o]);
+        if (o[i] !== null && typeof(o[i])=="object") {
+            //going on step down in the object tree!!
+            traverse(o[i],func);
+        }
+    }
+}
+
+// Utility function to check if an object is empty
+const isEmpty = (obj) =>{
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+// Begins the process of generating the add-on package by taking a pre-defined integration type
+// Performs several async calls of the methods created above
 const startZip = (integrationType) =>{    
     let addonTitle = $('#addon_name').val();
     addonName = addonTitle || 'my-custom-view-tile';
@@ -254,36 +310,6 @@ const startZip = (integrationType) =>{
     .catch((err) =>{
         console.log(err);
     })
-}
-
-const guid = (function() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-    return function() {
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
-    };
-})();
-
-const traverse = (o,func) =>{
-    for (var i in o) {
-        func.apply(this,[i,o[i], o]);
-        if (o[i] !== null && typeof(o[i])=="object") {
-            //going on step down in the object tree!!
-            traverse(o[i],func);
-        }
-    }
-}
-
-const isEmpty = (obj) =>{
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
 }
 
 const encodeImage = (imageUri, callback) =>{
@@ -349,6 +375,7 @@ const readURL = (input) =>{
     }
 }
 
+// Listeners for button click and to start the zip blob
 const bindEvent = (el, eventName, eventHandler) =>{
     if (el.addEventListener){
         // standard way
@@ -380,10 +407,14 @@ if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('
     }
 }
 
+// adjusts window dimensions
 const adjustDimensions = ()=>{
-    setTimeout(()=>{
-    gadgets.window.adjustHeight();
-    gadgets.window.adjustWidth();
-    },250);
+        gadgets.window.adjustHeight();
+        gadgets.window.adjustWidth();
 }
-gadgets.util.registerOnLoadHandler(adjustDimensions);
+
+const init = () =>{
+    loadNavigation();
+}
+
+gadgets.util.registerOnLoadHandler(init);

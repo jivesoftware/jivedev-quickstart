@@ -18,19 +18,23 @@
   happens to be available in our tests.
   -->
   <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
+  <script type="text/javascript" src="javascripts/navigation.js"></script>
   <script type="text/javascript" src="javascripts/FileSaver.js"></script>
   <script type="text/javascript" src="javascripts/main.js"></script>
   <script>
         // Set integration type here — either "tile", "stream" or "oauth"
         // TO DO: Create one for app
         let integType = "tile";
+
+        // If there are any additional files to be added other than the default files, use the following
+        // additionalFiles.push("{{FILE_PATH}}");
     </script>
 </head>
 
 <body>
-    <div class="nav"></div>
     <div class="wrapper">
-        <img class="headingImage" src="developer_icon.png" />
+        <div class="main_nav"></div>
         <h1>Custom View Tile Builder</h1>
         This form lets you create an add-on containing a Jive Custom View Tile App. A Jive App is an
         integration that displays a contextually aware UI to expand the functionality of the Jive platform. For more details about this feature,

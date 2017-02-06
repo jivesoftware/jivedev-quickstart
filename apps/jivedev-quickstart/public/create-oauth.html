@@ -18,18 +18,23 @@
     happens to be available in our tests.
     -->
     <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="javascripts/navigation.js"></script>
     <script type="text/javascript" src="javascripts/FileSaver.js"></script>
     <script type="text/javascript" src="javascripts/main.js"></script>
     <script>
         // Set integration type here — either "tile", "stream" or "oauth"
         // TO DO: Create one for app
         let integType = "oauth";
+
+        // If there are any additional files to be added other than the default files, use the following
+        // additionalFiles.push("{{FILE_PATH}}");
     </script>
 </head>
 
 <body>
     <div class="wrapper">
-        <img class="headingImage" src="developer_icon.png" />
+        <div class="main_nav"></div>
         <h1>OAuth Add-on Builder</h1>
         <img class="headingImage" src="authenticators.png" alt="authenticators" />
         <p>Quickly build an OAuth 2.0 client that enables you to get an OAuth access and refresh token for your Jive instance with this form. The access token provides controlled API access to content in Jive to a third-party service. For more information on gaining an access token with <a href="https://community.jivesoftware.com/docs/DOC-175308#jive_content_id_Using_Authorization_Code_Grant" target="_blank">Authorization Code Grant</a>, <a href="https://community.jivesoftware.com/docs/DOC-175308#jive_content_id_Using_Resource_Owner_Password_Credentials_Grant" target="_blank">Resource Owner Password Credentials Grant</a> and more, check out the <a href="https://community.jivesoftware.com/community/developer/">Jive Developer Community</a>.</p>
