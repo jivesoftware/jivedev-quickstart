@@ -9,5 +9,5 @@
     "icon_48": "extension-48.png",
     "icon_128": "extension-128.png",
     "service_url": "http:",
-    "redirect_url" : "%serviceURL%"
+    "redirect_url" : "$$$REDIRECT_URL$$$"
 }

@@ -7,13 +7,6 @@
 const matches = window.location.href.match(/.*?[?&]url=([^&]+)%2F.*$/);  
 const addonURL = decodeURIComponent(matches[1]);
 
-// When an image file is selected for upload, the window needs to be resized begin the 
-// process of resizing the image and converting to Base64
-$('#inputFile').change(()=>{
-    readURL($('#inputFile')[0]);
-    gadgets.window.adjustHeight();
-});
-
 // These files are universal to all addons that are packaged
 const commonFiles = ["meta.json", "data/eula.html", "i18n/en.properties", "i18n/root.properties"];
 // This variable holds any files that are specific to the integration type and others specified
@@ -228,6 +221,20 @@ const createZip = (files) =>{
         })
     })
 
+    // Adds the images to the add-on package
+    let p16 = $("#image_upload_preview").attr("data-p16"),
+        p48 = $("#image_upload_preview").attr("data-p48"),
+        p128 = $("#image_upload_preview").attr("data-p128");
+    if ( p16 ) {
+        zip.folder("data").file("icon-16.png", p16, { base64: true});
+    }
+    if ( p48 ) {
+        zip.folder("data").file("icon-48.png", p48, { base64: true});
+    }
+    if ( p128 ) {
+        zip.folder("data").file("icon-128.png", p128, { base64: true});
+    }
+
     let blob = zip.generate({type:"blob"});
     saveAs(blob, addonName + ".zip");
 }
@@ -331,7 +338,6 @@ const imageToDataUri = (img, width, height) =>{
     // create an off-screen canvas
     var canvas = document.createElement('canvas'),
         ctx = canvas.getContext('2d');
-        console.log($('canvas'));
     // set its dimension to target size
     canvas.width = width;
     canvas.height = height;
@@ -347,31 +353,48 @@ const base64ToDataUri = (base64) =>{
     return 'data:image/png;base64,' + base64;
 }
 
-const resizeImage = (image) =>{
-    var p16 = imageToDataUri(image, 16, 16);
-    console.log(p16);
-    var p48 = imageToDataUri(image, 48, 48);
-    var p128 = imageToDataUri(image, 128, 128);
-
-    $("#image_upload_preview").attr("data-p16", p16.split(',')[1]);
-    $("#image_upload_preview").attr("data-p48", p48.split(',')[1]);
-    $("#image_upload_preview").attr("data-p128", p128.split(',')[1]);
+const resizeImage = () =>{
+    new Promise((resolve, reject) =>{
+        var imageObj = new Image();
+        var imageObj = new Image;
+        imageObj.onload = () =>{
+            resolve(imageObj);
+        }
+        imageObj.src =  $("#image_upload_preview").attr("src");
+    })
+    .then((img) =>{
+        let p16 = imageToDataUri(img, 16, 16); 
+        $("#image_upload_preview").attr("data-p16", p16.split(',')[1]);
+        return img;
+    })
+    .then((img) =>{
+        let p48 = imageToDataUri(img, 48, 48); 
+        $("#image_upload_preview").attr("data-p48", p48.split(',')[1]);
+        return img;
+    })
+    .then((img) =>{
+        let p128 = imageToDataUri(img, 128, 128); 
+        $("#image_upload_preview").attr("data-p128", p128.split(',')[1]);
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
 }
 
 const readURL = (input) =>{
-    if (input[0].files && input[0].files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var imgSrc = e.target.result;
-            $('#image_upload_preview').attr('src', imgSrc).show();
-
-            var img = new Image;
-
-            img.onload = resizeImage(img);
-            img.src =  $("#image_upload_preview").attr("src");
-
-        };
-        reader.readAsDataURL(input[0].files[0]);
+    if (inputFile && inputFile.files[0]) {
+        let file = inputFile.files[0];
+        if(file.type === 'image/png' || file.type === 'image/jpeg'){
+            let reader = new FileReader();
+            reader.onload = (e) =>{
+                let imgSrc = e.target.result;
+                $('#image_upload_preview').attr('src', imgSrc).show();
+                resizeImage();
+            }
+            reader.readAsDataURL(file);
+        } else{
+            alert("Please upload a .png or .jpg/.jpeg image");
+        }
     }
 }
 
@@ -387,23 +410,25 @@ const bindEvent = (el, eventName, eventHandler) =>{
 }
 
 
-// Blob
-if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
-    $("#j-notice").html("<br>For Safari browsers, the file will download with a name like <b>Unknown</b>. " +
-            "You can upload this straightaway to your Jive instance, or rename name the file with a .zip extension to easily view its contents.");
-    $('#blob').click( function() {
-        window.location = "data:application/zip;base64," + startZip(integType);
-    } );
-} else {
-    // other
-    // safari
-    var blobLink = document.getElementById('blob');
-    if (JSZip.support.blob) {
+const loadBrowserBlob = () =>{
+    // Blob
+    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+        $("#j-notice").html("<br>For Safari browsers, the file will download with a name like <b>Unknown</b>. " +
+                "You can upload this straightaway to your Jive instance, or rename name the file with a .zip extension to easily view its contents.");
         $('#blob').click( function() {
-            startZip(integType);
+            window.location = "data:application/zip;base64," + startZip(integType);
         } );
     } else {
-        blobLink.innerHTML += " (not supported on this browser)";
+        // other
+        // safari
+        var blobLink = document.getElementById('blob');
+        if (JSZip.support.blob) {
+            $('#blob').click( function() {
+                startZip(integType);
+            } );
+        } else {
+            blobLink.innerHTML += " (not supported on this browser)";
+        }
     }
 }
 
@@ -415,6 +440,17 @@ const adjustDimensions = ()=>{
 
 const init = () =>{
     loadNavigation();
+    loadBrowserBlob();
+    adjustDimensions();
+    // Sets the background image of the navigation
+    $('.main_nav').css('background-image', `url('${addonURL}/images/background-nav@3x.png')`);
+    
+    // When an image file is selected for upload, the window needs to be resized begin the 
+    // process of resizing the image and converting to Base64
+    $('#inputFile').change(()=>{
+        let input = document.getElementById('inputFile');
+        readURL(input);
+    });
 }
 
 gadgets.util.registerOnLoadHandler(init);

@@ -2,64 +2,70 @@
     Set integration type at the bottom <script> tag if creating new builder
 -->
 <html>
+
 <head>
-    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <script type="text/javascript" src="javascripts/jszip.js"></script>
-    <script type="text/javascript" src="javascripts/jszip-utils.js"></script>
-    <!--
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<script type="text/javascript" src="javascripts/jszip.js"></script>
+	<script type="text/javascript" src="javascripts/jszip-utils.js"></script>
+	<!--
     Mandatory in IE 6, 7, 8 and 9.
     -->
-    <!--[if IE]>
+	<!--[if IE]>
     <script type="text/javascript" src="javascripts/jszip-utils-ie.js"></script>
     <![endif]-->
 
-    <!--
+	<!--
     Any version of jQuery will do (it's just to write some examples), this one
     happens to be available in our tests.
     -->
-    <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
-    <script type="text/javascript" src="javascripts/navigation.js"></script>
-    <script type="text/javascript" src="javascripts/FileSaver.js"></script>
-    <script type="text/javascript" src="javascripts/main.js"></script>
-    <script>
-        // Set integration type here — either "tile", "stream" or "oauth"
-        let integType = "stream";
+	<script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
+	<script type="text/javascript" src="javascripts/navigation.js"></script>
+	<script type="text/javascript" src="javascripts/FileSaver.js"></script>
+	<script type="text/javascript" src="javascripts/main.js"></script>
+	<script>
+		// Set integration type here — either "tile", "stream" or "oauth"
+		let integType = "stream";
 
-        // If there are any additional files to be added other than the default files, use the following
-        // additionalFiles.push("{{FILE_PATH}}");
-    </script>
+		// If there are any additional files to be added other than the default files, use the following
+		// additionalFiles.push("{{FILE_PATH}}");
+	</script>
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="main_nav"></div>
-        <h1>Simple Stream Integration Builder</h1>
-        Build your first simple stream integration in minutes! This form helps you create an add-on containing a Jive Simple Stream Integration. A Simple Stream Integration is an integration between a third party webhook provider and Jive. For more details on using this feature, refer to the <a href="https://community.jivesoftware.com/community/developer/blog/2015/08/04/how-to-using-the-simple-stream-integration-builder">Dev Tools series</a> in the Jive Community.
-    <p style="font-size: 14px;"><em>Disclaimer: Simple Stream Integration Builder only works with Jive Cloud and Jive 9.</em></p>
-        <div class="builder">
-            <hr />
-            <div class="container">
-                <div class="left"><h2>Title</h2>Enter the unique title you want to give your Simple Stream Integration.
-                </div>
-                <div class="right">
-                    <input type="text" id="addon_name" value="My SSI" />
-                </div>
-            </div>
+	<div class="wrapper">
+		<div class="main_nav"></div>
+		<div class="sub-header-wrapper stream-builder">
+			<h1>Simple Stream Integration Builder</h1>
+			<p>Build your first simple stream integration in minutes! This form helps you create an add-on containing a Jive Simple Stream Integration. A Simple Stream Integration is an integration between a third party webhook provider and Jive. For more details
+				on using this feature, refer to the <a href="https://community.jivesoftware.com/community/developer/blog/2015/08/04/how-to-using-the-simple-stream-integration-builder" target="_blank">Dev Tools series</a> in the Jive Community.</p>
+			<p><em>Disclaimer: Simple Stream Integration Builder only works with Jive Cloud and Jive 9+.</em></p>
+		</div>
+		<div class="builder">
+			<div class="container">
+				<div class="left">
+					<h2>Title</h2>Enter the unique title you want to give your Simple Stream Integration.
+				</div>
+				<div class="right">
+					<input type="text" id="addon_name" value="My SSI" />
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>Description</h2>Give your tile a description which can be viewed in the add-on installation page.
-                </div>
-                <div class="right">
-                    <textarea id="description">This is my SSI description.</textarea>
-                </div>
-            </div>
+			<div class="container">
+				<div class="left">
+					<h2>Description</h2>Give your tile a description which can be viewed in the add-on installation page.
+				</div>
+				<div class="right">
+					<textarea id="description">This is my SSI description.</textarea>
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>Transform Function</h2>Enter the HTML to be used by the view and displayed to the end user in the Custom View Tile's iframe
-                </div>
-                <div class="right"><pre><b>function transform(body, headers, options, callback) {</b></pre>
-                    <textarea id="custom_0" data-path="/data/xform.js">
+			<div class="container">
+				<div class="left">
+					<h2>Transform Function</h2>Enter the HTML to be used by the view and displayed to the end user in the Custom View Tile's iframe
+				</div>
+				<div class="right"><pre><b>function transform(body, headers, options, callback) {</b></pre>
+					<textarea id="custom_0" data-path="/data/xform.js">
 /*
  * TO DO: Parse 'body' arg based on incoming event from 3rd party system.
  * TO DO: Replace the sample code below with your own transformation code.
@@ -92,50 +98,55 @@ activityInfo.object.description = body.description;
 
 callback({ "activity" : activityInfo });
                     </textarea><pre><b>}</b></pre>
-                </div>
-            </div>
-            
-            <div class="container">
-                <div class="left"><h2>Sample Webhook Payload</h2>Update the Sample Input with event data that should come from the third party webhook. You can then test your transform function by clicking the "Run Transform" button in step 3.
-                </div>
-                <div class="right">
-                    <textarea id="tx_input">
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="left">
+					<h2>Sample Webhook Payload</h2>Update the Sample Input with event data that should come from the third party webhook. You can then test your transform function by clicking the "Run Transform" button in step 3.
+				</div>
+				<div class="right">
+					<textarea id="tx_input">
 {
   "title" : "Title from webhook",
   "description" : "Description from webhook",
   "other" : "Some other info"
 }
                     </textarea>
-                </div>
-            </div>
-            
-            <div class="container">
-                <div class="left"><h2>Review Output</h2>This is the JavaScript that is used by the Custom View Tile. Note that it's best practice to have all javascript execute after the jive.tile.onOpen function is called.
-                </div>
-                <div class="right">
-                    <textarea id="tx_output" readonly>
-                    </textarea>
-                    <p><b>Transform Function Test</b>: <span id="callback_check">N/A</span></p>
-                    <p><b>Output Validation Test</b>: <span id="validation_check">N/A</span></p>
-                    <button id="run-transform" class="btn btn-primary">Test Transform</button>
-                </div>
-            </div>
-            
-            <div class="container">
-                <div class="left"><h2>Icon</h2>Pick a square image that is at least 128px X 128px for your add-on.
-                </div>
-                <div class="right">
-                    <form id="form1" runat="server">
-                        <input type='file' id="inputFile" />
-                        <img id="image_upload_preview" src="sample-icon-128.png" alt="your image" width="128px"/>
-                    </form>
-                </div>
-            </div>
+				</div>
+			</div>
 
-            <br /><hr /><br />
-            <button id="blob" class="btn btn-primary">Download Add-on</button>
-            <p>After downloading this add-on package, upload it into your Jive community. Check out BLANK for more information.</p>
-        </div>
-    </div>
+			<div class="container">
+				<div class="left">
+					<h2>Review Output</h2>This is the JavaScript that is used by the Custom View Tile. Note that it's best practice to have all javascript execute after the jive.tile.onOpen function is called.
+				</div>
+				<div class="right">
+					<textarea id="tx_output" readonly>
+                    </textarea>
+					<p><b>Transform Function Test</b>: <span id="callback_check">N/A</span></p>
+					<p><b>Output Validation Test</b>: <span id="validation_check">N/A</span></p>
+					<button id="run-transform" class="btn btn-primary">Test Transform</button>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="left">
+					<h2>Icon</h2>Pick a square image that is at least 128px X 128px for your add-on.
+				</div>
+				<div class="right">
+					<form id="form1" runat="server">
+						<input type='file' id="inputFile" />
+						<img id="image_upload_preview" src="sample-icon-128.png" alt="your image" width="128px" />
+					</form>
+				</div>
+			</div>
+
+      <footer>
+  			<button id="blob" class="btn btn-primary">Download Add-on</button>
+  			<p>After downloading this add-on package, upload it into your Jive community. Check out <a href="https://community.jivesoftware.com/docs/DOC-141123" target="_blank">Installing and Updating an Add-on into Your Community</a> for more information.</p>
+      </footer>
+		</div>
+	</div>
 </body>
+
 </html>

@@ -2,69 +2,73 @@
     Set integration type at the bottom <script> tag if creating new builder
 -->
 <html>
+
 <head>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-  <script type="text/javascript" src="javascripts/jszip.js"></script>
-  <script type="text/javascript" src="javascripts/jszip-utils.js"></script>
-  <!--
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<script type="text/javascript" src="javascripts/jszip.js"></script>
+	<script type="text/javascript" src="javascripts/jszip-utils.js"></script>
+	<!--
   Mandatory in IE 6, 7, 8 and 9.
   -->
-  <!--[if IE]>
+	<!--[if IE]>
   <script type="text/javascript" src="javascripts/jszip-utils-ie.js"></script>
   <![endif]-->
 
-  <!--
+	<!--
   Any version of jQuery will do (it's just to write some examples), this one
   happens to be available in our tests.
   -->
-  <script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
-  <script type="text/javascript" src="javascripts/navigation.js"></script>
-  <script type="text/javascript" src="javascripts/FileSaver.js"></script>
-  <script type="text/javascript" src="javascripts/main.js"></script>
-  <script>
-        // Set integration type here — either "tile", "stream" or "oauth"
-        // TO DO: Create one for app
-        let integType = "tile";
+	<script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
+	<script type="text/javascript" src="javascripts/navigation.js"></script>
+	<script type="text/javascript" src="javascripts/FileSaver.js"></script>
+	<script type="text/javascript" src="javascripts/main.js"></script>
+	<script>
+		// Set integration type here — either "tile", "stream" or "oauth"
+		// TO DO: Create one for app
+		let integType = "tile";
 
-        // If there are any additional files to be added other than the default files, use the following
-        // additionalFiles.push("{{FILE_PATH}}");
-    </script>
+		// If there are any additional files to be added other than the default files, use the following
+		// additionalFiles.push("{{FILE_PATH}}");
+	</script>
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="main_nav"></div>
-        <h1>Custom View Tile Builder</h1>
-        This form lets you create an add-on containing a Jive Custom View Tile App. A Jive App is an
-        integration that displays a contextually aware UI to expand the functionality of the Jive platform. For more details about this feature,
-        refer to <a href="https://community.jivesoftware.com/docs/DOC-112287">Jive Apps (OpenSocial)</a> in the
-        Jive Community.
-        <p>For more details about Custom View Tiles and extending beyond the output of this builder, read <a href="https://community.jivesoftware.com/docs/DOC-141800?sr=search&searchId=3c80e28d-1f8c-426f-b369-4a0e9f723139&searchIndex=1">Creating Custom View Tiles</a></p>
-        To use this builder, it's recommended that you copy and paste the example code snippets in to your editor, make your changes, and then paste it back in the textboxes. You can also build a default Custom View Tile add-on with the snippets as they are to see how an add-on works. After you download the archive file, see <a href="https://community.jivesoftware.com/docs/DOC-141123">Installing and Updating an Add-on into Your Community</a>.
-        <div class="builder">
-            <hr />
-            <div class="container">
-                <div class="left"><h2>Title</h2>Enter the unique title you want to give your Custom View Tile.
-                </div>
-                <div class="right">
-                    <input type="text" id="addon_name" value="My Custom View Tile" />
-                </div>
-            </div>
+	<div class="wrapper">
+		<div class="main_nav"></div>
+		<div class="sub-header-wrapper tile-builder">
+			<h1>Custom View Tile Builder</h1>
+			<p>This form lets you create an add-on containing a Jive Custom View Tile. A Jive App is an integration that displays a contextually aware UI to expand the functionality of the Jive platform. For more details about this feature, refer to
+				<a href="https://community.jivesoftware.com/docs/DOC-112287" target="_blank">Jive Apps (OpenSocial)</a> in the Jive Community.</p>
+			<p>For more details about Custom View Tiles and extending beyond the output of this builder, read <a href="https://community.jivesoftware.com/docs/DOC-141800" target="_blank">Creating Custom View Tiles</a></p>
+			To use this builder, it's recommended that you copy and paste the example code snippets in to your editor, make your changes, and then paste it back in the textboxes. You can also build a default Custom View Tile add-on with the snippets as they are to
+			see how an add-on works. After you download the archive file, see <a href="https://community.jivesoftware.com/docs/DOC-141123" target="_blank">Installing and Updating an Add-on into Your Community</a>.
+		</div>
+		<div class="builder">
+			<div class="container">
+				<div class="left">
+					<h2>Title</h2>Enter the unique title you want to give your Custom View Tile.
+				</div>
+				<div class="right">
+					<input type="text" id="addon_name" value="My Custom View Tile" />
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>Description</h2>Give your tile a description which can be viewed in the add-on installation page.
-                </div>
-                <div class="right">
-                    <textarea id="description">This is my Custom View Tile description.</textarea>
-                </div>
-            </div>
+			<div class="container">
+				<div class="left">
+					<h2>Description</h2>Give your tile a description which can be viewed in the add-on installation page.
+				</div>
+				<div class="right">
+					<textarea id="description">This is my Custom View Tile description.</textarea>
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>HTML</h2> the HTML to be used by the view and displayed to the end user in the Custom View Tile's iframe.
-                </div>
-                <div class="right">
-                    <textarea id="custom_0" data-path="/public/tiles/$$$INTERNAL_NAME$$$/view.html">
+			<div class="container">
+				<div class="left">
+					<h2>HTML</h2> the HTML to be used by the view and displayed to the end user in the Custom View Tile's iframe.
+				</div>
+				<div class="right">
+					<textarea id="custom_0" data-path="/public/tiles/$$$INTERNAL_NAME$$$/view.html">
     <html>
         <head>
             <!--Enter any externally hosted JS files such as JQuery:
@@ -73,7 +77,7 @@
             <!--DON'T DELETE THE NEXT THREE LINES-->
             <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
             <script type="text/javascript" src="https://rashed.ngrok.io/BuilderTest/javascripts/main.js"></script>
-            <script type="text/javascript" src="https://rashed.ngrok.io/BuilderTest/javascripts/view.js"></script> 
+            <script type="text/javascript" src="https://rashed.ngrok.io/BuilderTest/javascripts/view.js"></script>
         </head>
         <body>
             <div id="jiveURL"><h2>Current Jive URL</h2></div>
@@ -88,14 +92,15 @@
         </body>
     </html>
                     </textarea>
-                </div>
-            </div>
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>CSS</h2> is the CSS to stylize the view of your custom view tile
-                </div>
-                <div class="right">
-                    <textarea id="custom_1" data-path="/public/tiles/$$$INTERNAL_NAME$$$/stylesheets/style.css">
+			<div class="container">
+				<div class="left">
+					<h2>CSS</h2> is the CSS to stylize the view of your custom view tile
+				</div>
+				<div class="right">
+					<textarea id="custom_1" data-path="/public/tiles/$$$INTERNAL_NAME$$$/stylesheets/style.css">
 h2 {
     margin-bottom: 0;
 }
@@ -105,18 +110,19 @@ input, url {
     min-width: 500px;
 }
                     </textarea>
-                </div>
-            </div>
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>JavaScript</h2>This is the JavaScript that is used by the Custom View Tile.
-                <p><em>Note: It's best practice to have all javascript execute AFTER the jive.tile.onOpen function is called.</em></p>
-                </div>
-                <div class="right">
-                    <textarea id="custom_2" data-path="/public/tiles/$$$INTERNAL_NAME$$$/javascripts/view.js">
+			<div class="container">
+				<div class="left">
+					<h2>JavaScript</h2>This is the JavaScript that is used by the Custom View Tile.
+					<p class="note-info"><i class="fa fa-info-circle"></i>It's best practice to have all javascript execute AFTER the jive.tile.onOpen function is called.</p>
+				</div>
+				<div class="right">
+					<textarea id="custom_2" data-path="/public/tiles/$$$INTERNAL_NAME$$$/javascripts/view.js">
 jive.tile.onOpen((config, options) =>{
     // Since this tile doesn't have a configuration page, the config and options objects are undefined
-    let tileContext = new Context(config, options);    
+    let tileContext = new Context(config, options);
 
     $('#jiveURL').append(tileContext.jiveURL);
     $('#addonURL').append(tileContext.appURL);
@@ -132,7 +138,7 @@ jive.tile.onOpen((config, options) =>{
         })
     })
 
-    // Make an OSAPI HTTP Get request 
+    // Make an OSAPI HTTP Get request
     // These requests are made server-side
     // See https://community.jivesoftware.com/docs/DOC-185776#jive_content_id_OSAPI_API
     // for more information about the types of requests and signed
@@ -149,24 +155,26 @@ jive.tile.onOpen((config, options) =>{
     })
 })
                     </textarea>
-                </div>
-            </div>
+				</div>
+			</div>
 
-            <div class="container">
-                <div class="left"><h2>Icon</h2>Pick a square image that is at least 128px X 128px for your add-on.
-                </div>
-                <div class="right">
-                    <form id="form1" runat="server">
-                        <input type='file' id="inputFile" />
-                        <img id="image_upload_preview" src="sample-icon-128.png" alt="your image" width="128px"/>
-                    </form>
-                </div>
-            </div>
-
-            <br /><hr /><br />
-            <button id="blob" class="btn btn-primary">Download Add-on</button>
-            <p>After downloading this add-on package, upload it into your Jive community. Check out BLANK for more information.</p>
-        </div>
-    </div>
+			<div class="container">
+				<div class="left">
+					<h2>Icon</h2>Pick a square image that is at least 128px X 128px for your add-on.
+				</div>
+				<div class="right">
+					<form id="form1" runat="server">
+						<input type='file' id="inputFile" />
+						<img id="image_upload_preview" src="sample-icon-128.png" alt="your image" width="128px" />
+					</form>
+				</div>
+			</div>
+      <footer>
+  			<button id="blob" class="btn btn-primary">Download Add-on</button>
+  			<p>After downloading this add-on package, upload it into your Jive community. Check out <a href="https://community.jivesoftware.com/docs/DOC-141123" target="_blank">Installing and Updating an Add-on into Your Community</a> for more information.</p>
+      </footer>
+		</div>
+	</div>
 </body>
+
 </html>

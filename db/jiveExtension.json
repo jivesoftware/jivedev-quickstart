@@ -8,6 +8,8 @@
     "icon_48": "extension-48.png",
     "icon_128": "extension-128.png",
     "releasedOn": "2016-12-14T13:57:39.551Z",
-    "suppressAddonRegistration": true
+    "suppressAddonRegistration": true,
+    "author": "Rashed Talukder",
+    "author_affiliation": "Jive Software"
   }
 }

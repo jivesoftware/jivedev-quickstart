@@ -1,5 +1,26 @@
-# Jive Custom View Tile Builder
+# JiveDev QuickStart App
 
-You can easily create a Jive Custom View Tile Integration using this form that auto-generates the package for you (in the form of a Jive add-on). All you need to do is write the HTML, CSS, and JavaScript assets and paste it in. Once you have the add-on package, you can upload it to your Jive community.
+This is the official jivedev QuickStart app that is made available in the Jive Registry. It's current functionality includes generating Custom View Tile, Simple Stream Integration, and OAuth installable add-ons through the App's UI. It is expandable in functionality by editing the /apps/jivedev-quickstart/public/javascripts/main.js file to incorporate other integration types such as Apps.
 
-* [Creating Custom View Tiles] (https://community.jivesoftware.com/docs/DOC-141800?sr=search&searchId=3c80e28d-1f8c-426f-b369-4a0e9f723139&searchIndex=1)
+## Navigation
+The navigation is fetched from https://developer.jivesoftware.com/DeveloperAssets/getting-started-nav.json and follows the following example structure:
+    {
+        "main" : [
+            {
+                "label" : "JiveWorks: Developer",
+                "href" : "https://community.jivesoftware.com/community/developer"
+            },
+            {
+                "label" : "Resources",
+                "href" : "https://community.jivesoftware.com/docs/DOC-112271",
+                "submenu" : [
+                    {
+                        "label" : "REST API Docs",
+                        "href" : "https://developers.jivesoftware.com/api/v3/cloud/rest/"
+                    }       
+                ]
+            }
+        ]
+    }
+
+Written & maintained by: Rashed Talukder

@@ -1,42 +1,84 @@
-/****************************************************
-* Note:  This implmentation has been provided for convenience, developers are not required to use this pattern.
-*
-* SEE: Tile API & Development FAQ - https://community.jivesoftware.com/docs/DOC-185776
-****************************************************/
+(function () {
 
-class Context {
-    constructor (config, options){
-        // Config and Options objects may be undefined if there is no configuration page defined
-        this.config = config;
-        this.options = options;
-        this.appURL = null;
-        this.jiveURL = null;
+    jive.tile.onOpen(function (config, options) {
 
-        // Get the parent container info from Jive
-        this.container = new Promise((resolve, reject) => {
-            jive.tile.getContainer((container) =>{
-                resolve(container)
-            });
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        // state
+
+        var configAdaptor = ConfigAdaptor();
+        var diagnostics = Diagnostics();
+        configAdaptor.init(config);
+        var tileDescriptor = configAdaptor.prepareDescriptor();
+        var endPointTemplate = getJiveURL() + "/api/core/v3/extstreams/activities/external/{extensionUUID}/{externalId}/{privatePath}";
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        // main
+
+        configAdaptor.init(config, tileDescriptor);
+        var endPoint = generateEndPoint();
+        diagnostics.init(endPoint, tileDescriptor);
+        showEndpoint(endPoint, "POST");
+
+        $('#j-activity-stream-title').val(tileDescriptor.displayName);
+
+        showTestButtonWarning(tileDescriptor.isNew);
+        gadgets.window.adjustHeight();
+
+        function showTestButtonWarning(show) {
+            if (show) {
+                $('#test-btn-warning').html(i18n("main.html.button.test.warning.text"));
+                $('#btn-test').prop('disabled', true);
+            }
+
+            gadgets.window.adjustHeight();
+        }
+
+        function generateEndPoint() {
+            return endPointTemplate
+                .replace("{extensionUUID}", extensionID())
+                .replace("{externalId}", tileDescriptor.externalId)
+                .replace("{privatePath}", tileDescriptor.privatePath);
+        }
+
+        function regenerateEndPoint() {
+            showTestButtonWarning(true);
+            tileDescriptor.generatePrivatePath();
+            showNotification('The POST URL has been regenerated. Changes will take effect after the page is saved.');
+            return generateEndPoint();
+        }
+
+        function showEndpoint(endpoint) {
+            $('#rest-endpoint').text(endpoint);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        // UI events
+
+        $('#btn-regenerate').click(function () {
+            showEndpoint(regenerateEndPoint());
         });
 
-        // Getting info about the current viewer/user
-        this.viewer = new Promise((resolve, reject) =>{
-            osapi.jive.corev3.people.getViewer().execute((viewer) =>{
-                resolve(viewer);
-            })
-        })
+        $('#btn-cancel').click(function () {
+            jive.tile.close();
+        });
 
-        // Check if the GALA service is turned on and fetching App URL and Jive URL accordingly
-        // See https://community.jivesoftware.com/community/developer/blog/2016/11/29/speedier-custom-view-tiles-with-gala
-        if (gala && typeof gala === "object"){  
-            this.appURL = jive.tile.getAppURL();  
-            this.jiveURL = jive.tile.getJiveURL();
-        } else{
-            var matches = window.location.href.match(/.*?[?&]url=([^&]+)%2F.*$/);  
-            if (matches.length === 2){  
-                this.appURL = decodeURIComponent(matches[1]);
-                this.jiveURL = substring(0, this.appURL.indexOf('/resources/add-ons'));
-            }
-        }
-    }
-}
+        $('#btn-apply').click(function () {
+            tileDescriptor.displayName = $('#j-activity-stream-title').val();
+            configAdaptor.writeDescriptor(tileDescriptor, config);
+            var sampleData = [{
+                'name': 'Remote-push-Tile',
+                'data': config.data
+            }];
+            jive.tile.close(config, sampleData);
+            showNotification('Saved Tile');
+        });
+
+        $('#btn-test').click(function () {
+            var $parent = $('.j-main-view');
+            diagnostics.showDiagnostics($parent);
+        });
+
+    });
+
+})();
+

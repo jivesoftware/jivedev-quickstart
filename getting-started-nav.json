@@ -1,0 +1,18 @@
+{
+    "main" : [
+        {
+            "label" : "JiveWorks: Developer",
+            "href" : "https://community.jivesoftware.com/community/developer"
+        },
+        {
+            "label" : "Resources",
+            "href" : "https://community.jivesoftware.com/docs/DOC-112271",
+            "submenu" : [
+                {
+                    "label" : "REST API Docs",
+                    "href" : "https://developers.jivesoftware.com/api/v3/cloud/rest/"
+                }       
+            ]
+        }
+    ]
+}
