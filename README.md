@@ -4,6 +4,7 @@ This is the official jivedev QuickStart app that is made available in the Jive R
 
 ## Navigation
 The navigation is fetched from https://developer.jivesoftware.com/DeveloperAssets/getting-started-nav.json and follows the following example structure:
+```json
     {
         "main" : [
             {
@@ -22,5 +23,6 @@ The navigation is fetched from https://developer.jivesoftware.com/DeveloperAsset
             }
         ]
     }
+```
 
 Written & maintained by: Rashed Talukder
