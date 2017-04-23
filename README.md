@@ -5,24 +5,24 @@ This is the official jivedev QuickStart app that is made available in the Jive R
 ## Navigation
 The navigation is fetched from https://developer.jivesoftware.com/DeveloperAssets/getting-started-nav.json and follows the following example structure:
 ```json
-    {
-        "main" : [
-            {
-                "label" : "JiveWorks: Developer",
-                "href" : "https://community.jivesoftware.com/community/developer"
-            },
-            {
-                "label" : "Resources",
-                "href" : "https://community.jivesoftware.com/docs/DOC-112271",
-                "submenu" : [
-                    {
-                        "label" : "REST API Docs",
-                        "href" : "https://developers.jivesoftware.com/api/v3/cloud/rest/"
-                    }       
-                ]
-            }
-        ]
-    }
+{
+    "main" : [
+        {
+            "label" : "JiveWorks: Developer",
+            "href" : "https://community.jivesoftware.com/community/developer"
+        },
+        {
+            "label" : "Resources",
+            "href" : "https://community.jivesoftware.com/docs/DOC-112271",
+            "submenu" : [
+                {
+                    "label" : "REST API Docs",
+                    "href" : "https://developers.jivesoftware.com/api/v3/cloud/rest/"
+                }       
+            ]
+        }
+    ]
+}
 ```
 
 Written & maintained by: Rashed Talukder
