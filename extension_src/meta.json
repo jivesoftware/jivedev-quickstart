@@ -11,7 +11,18 @@
     "redirect_url": "%serviceURL%",
     "released_on": "2016-12-14T13:57:39.551Z",
     "service_url": "http://localhost",
-    "suppressAddonRegistration": true,
     "author": "Rashed Talukder",
-    "author_affiliation": "Jive Software"
+    "author_affiliation": "Jive Software",
+    "author_email": "rashed.talukder@jivesoftware.com",
+    "info_email": "jivedev@jivesoftware.com",
+    "screen_shots": [
+        "screenshot_1.png"
+    ],
+    "jive_technologypartner_id": 1,
+    "install_instructions": "install_instructions.html",
+    "eula_filename": "eula.html",
+    "overview": "overview.html",
+    "support_info": "https://community.jivesoftware.com/community/developer",
+    "website_url": "https://www.jivesoftware.com",
+    "version": 1
 }
