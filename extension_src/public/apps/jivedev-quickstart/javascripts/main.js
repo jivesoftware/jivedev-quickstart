@@ -451,6 +451,9 @@ const init = () =>{
         let input = document.getElementById('inputFile');
         readURL(input);
     });
+    if(extraJSInit){
+        extraJSInit();
+    }
 }
 
 gadgets.util.registerOnLoadHandler(init);
