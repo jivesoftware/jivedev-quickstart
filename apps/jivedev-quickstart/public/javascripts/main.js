@@ -451,7 +451,7 @@ const init = () =>{
         let input = document.getElementById('inputFile');
         readURL(input);
     });
-    if(extraJSInit){
+    if(extraJSInit && typeof extraJSInit === 'function'){
         extraJSInit();
     }
 }
