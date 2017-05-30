@@ -8,6 +8,6 @@
     "icon_16": "extension-16.png",
     "icon_48": "extension-48.png",
     "icon_128": "extension-128.png",
-    "service_url": "http:",
+    "service_url": "http://localhost",
     "redirect_url" : "$$$REDIRECT_URL$$$"
 }

@@ -5,19 +5,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<script type="text/javascript" src="javascripts/jszip.js"></script>
-	<script type="text/javascript" src="javascripts/jszip-utils.js"></script>
-	<!--
-  Mandatory in IE 6, 7, 8 and 9.
-  -->
-	<!--[if IE]>
-  <script type="text/javascript" src="javascripts/jszip-utils-ie.js"></script>
-  <![endif]-->
-
-	<!--
-  Any version of jQuery will do (it's just to write some examples), this one
-  happens to be available in our tests.
-  -->
+	<script type="text/javascript" src="javascripts/jszip.min.js"></script>
 	<script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
 	<script type="text/javascript" src="javascripts/navigation.js"></script>
@@ -68,7 +56,7 @@
 					<h2>HTML</h2> the HTML to be used by the view and displayed to the end user in the Custom View Tile's iframe.
 				</div>
 				<div class="right">
-					<textarea id="custom_0" data-path="/public/tiles/$$$INTERNAL_NAME$$$/view.html">
+					<textarea id="custom_0" data-path="public/tiles/$$$INTERNAL_NAME$$$/view.html">
     <html>
         <head>
             <!--Enter any externally hosted JS files such as JQuery:
@@ -76,8 +64,8 @@
             -->
             <!--DON'T DELETE THE NEXT THREE LINES-->
             <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-            <script type="text/javascript" src="https://rashed.ngrok.io/BuilderTest/javascripts/main.js"></script>
-            <script type="text/javascript" src="https://rashed.ngrok.io/BuilderTest/javascripts/view.js"></script>
+            <script type="text/javascript" src="javascripts/main.js"></script>
+            <script type="text/javascript" src="javascripts/view.js"></script>
         </head>
         <body>
             <div id="jiveURL"><h2>Current Jive URL</h2></div>
@@ -100,7 +88,7 @@
 					<h2>CSS</h2> is the CSS to stylize the view of your custom view tile
 				</div>
 				<div class="right">
-					<textarea id="custom_1" data-path="/public/tiles/$$$INTERNAL_NAME$$$/stylesheets/style.css">
+					<textarea id="custom_1" data-path="public/tiles/$$$INTERNAL_NAME$$$/stylesheets/style.css">
 h2 {
     margin-bottom: 0;
 }
@@ -119,7 +107,7 @@ input, url {
 					<p class="note-info"><i class="fa fa-info-circle"></i>It's best practice to have all javascript execute AFTER the jive.tile.onOpen function is called.</p>
 				</div>
 				<div class="right">
-					<textarea id="custom_2" data-path="/public/tiles/$$$INTERNAL_NAME$$$/javascripts/view.js">
+					<textarea id="custom_2" data-path="public/tiles/$$$INTERNAL_NAME$$$/javascripts/view.js">
 jive.tile.onOpen((config, options) =>{
     // Since this tile doesn't have a configuration page, the config and options objects are undefined
     let tileContext = new Context(config, options);

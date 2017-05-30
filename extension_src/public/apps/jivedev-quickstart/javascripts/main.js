@@ -197,7 +197,8 @@ const processParams = (_src, strToReplace, replacementValue) =>{
     _src.forEach((obj, index) =>{
         traverse(obj, (key,value,object) =>{
             if ( value && typeof value === 'string') {
-                value = value.replace(strToReplace, replacementValue);
+                // strToReplace = strToReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                value = value.replace(new RegExp(strToReplace, 'gi'), replacementValue);
                 object[key] = value;
             }
         })
@@ -213,7 +214,7 @@ const createZip = (files) =>{
         traverse(obj, (key, value, object) =>{
             let folderStr = key.substring(0, Math.max(key.lastIndexOf("/"), key.lastIndexOf("\\")));
             let fileStr = key.split('\\').pop().split('/').pop();
-            if(folderStr !== ""){
+            if(folderStr !== "" && fileStr !== ""){
                 zip.folder(folderStr).file(fileStr, value);
             } else{
                 zip.file(fileStr, value);
@@ -226,17 +227,19 @@ const createZip = (files) =>{
         p48 = $("#image_upload_preview").attr("data-p48"),
         p128 = $("#image_upload_preview").attr("data-p128");
     if ( p16 ) {
-        zip.folder("data").file("icon-16.png", p16, { base64: true});
+        zip.folder("data").file("extension-16.png", p16, { base64: true});
     }
     if ( p48 ) {
-        zip.folder("data").file("icon-48.png", p48, { base64: true});
+        zip.folder("data").file("extension-48.png", p48, { base64: true});
     }
     if ( p128 ) {
-        zip.folder("data").file("icon-128.png", p128, { base64: true});
+        zip.folder("data").file("extension-128.png", p128, { base64: true});
     }
 
-    let blob = zip.generate({type:"blob"});
-    saveAs(blob, addonName + ".zip");
+    // let blob = zip.generate({type:"blob"});
+    zip.generateAsync({type:"blob"}).then((blob) =>{
+        saveAs(blob, addonName + ".zip");
+    })
 }
 
 // Generate a random UUID for the integration
@@ -295,11 +298,11 @@ const startZip = (integrationType) =>{
     .then((files) =>{
         let id = guid();
         let replacers = {
-            "$$$DESCRIPTION$$$" : addonDescription,
-            "$$$DISPLAY_NAME$$$" : addonTitle,
-            "$$$INTERNAL_NAME$$$" : addonName,
-            "$$$EXTENSION_UUID$$$" : id,
-            "$$$REDIRECT_URL$$$" : "%serviceURL%"
+            "\\$\\$\\$DESCRIPTION\\$\\$\\$" : addonDescription,
+            "\\$\\$\\$DISPLAY_NAME\\$\\$\\$" : addonTitle,
+            "\\$\\$\\$INTERNAL_NAME\\$\\$\\$" : addonName,
+            "\\$\\$\\$EXTENSION_UUID\\$\\$\\$" : id,
+            "\\$\\$\\$REDIRECT_URL\\$\\$\\$" : "%serviceURL%"
         }
 
        for (var prop in replacers) {
@@ -451,7 +454,7 @@ const init = () =>{
         let input = document.getElementById('inputFile');
         readURL(input);
     });
-    if(extraJSInit && typeof extraJSInit === 'function'){
+    if(extraJSInit){
         extraJSInit();
     }
 }

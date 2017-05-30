@@ -5,19 +5,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<script type="text/javascript" src="javascripts/jszip.js"></script>
-	<script type="text/javascript" src="javascripts/jszip-utils.js"></script>
-	<!--
-    Mandatory in IE 6, 7, 8 and 9.
-    -->
-	<!--[if IE]>
-    <script type="text/javascript" src="javascripts/jszip-utils-ie.js"></script>
-    <![endif]-->
-
-	<!--
-    Any version of jQuery will do (it's just to write some examples), this one
-    happens to be available in our tests.
-    -->
+	<script type="text/javascript" src="javascripts/jszip.min.js"></script>
 	<script type="text/javascript" src="javascripts/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="javascripts/handlebars-v4.0.5.js"></script>
 	<script type="text/javascript" src="javascripts/navigation.js"></script>
@@ -66,7 +54,7 @@
 					<h2>Transform Function</h2>Enter the HTML to be used by the view and displayed to the end user in the Custom View Tile's iframe
 				</div>
 				<div class="right"><pre><b>function transform(body, headers, options, callback) {</b></pre>
-					<textarea id="custom_0" data-path="/data/xform.js">
+					<textarea id="custom_0" data-path="data/xform.js">
 /*
  * TO DO: Parse 'body' arg based on incoming event from 3rd party system.
  * TO DO: Replace the sample code below with your own transformation code.

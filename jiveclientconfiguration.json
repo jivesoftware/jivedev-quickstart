@@ -27,8 +27,7 @@
 			"overview": "overview.html",
 			"support_info": "https://community.jivesoftware.com/community/developer",
 			"website_url": "https://www.jivesoftware.com",
-			"version" : "1.0.2"
-
+			"version" : "1.0.3"
 	},
 	"ext" : {
 		"your-recommended-place" : "to-store-your-app-system-config"

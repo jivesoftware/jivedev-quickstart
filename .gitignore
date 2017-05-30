@@ -57,5 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
-global_registry
-extension_src
+global_registry/
+extension_src/
+db/
+logs/
